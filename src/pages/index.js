@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
-import Tags from '../Components/tags'
-import FoodItem from '@/Components/foodItem'
-import TitleBox from '@/Components/titleBox'
+import Button from '@/Components/button'
+import TextBoxGreen from '@/Components/textBoxGreen'
+import Options from '@/Components/options'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
@@ -13,10 +13,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet='UTF-8'/>
       </Head>
-      <Tags text="aaaa" />
-      <Tags text="Elephent"/>
-      <FoodItem Name="Rice" imageNumber={10}/>
-      <TitleBox title="Food Menu"/>
+      <Button text='Submit'/>
+      <TextBoxGreen title='MACM' placeholder='aa'/>
+      <Options text='option1'/>
     </>
   )
 }
