@@ -1,4 +1,4 @@
-import Label from "./label"
+import Label from "../label"
 export default function counter({text,amount}){
     return(
         <div className={
