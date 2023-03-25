@@ -1,8 +1,8 @@
-import TitleBox from "./titleBox";
-import TextArea from "./textArea";
-import Button from "./button";
-import TextBoxGreen from "./textBoxGreen";
-import Tag from "./tags";
+import TitleBox from "../TitleBox";
+import TextArea from "../TextArea";
+import Button from "../Button";
+import TextBoxGreen from "../TextBox";
+import Tag from "../Tags";
 
 export default function foodItem({ Name, imageNumber }) {
   return (
