@@ -6,8 +6,8 @@ export default function NavBox(Links) {
         "w-fit h-fit p-15 rounded-lg shadow-lg shadow-black flex flex-1 flex-col justify-between gap-15"
       }
     >
-      {Links.Links.map((Link) => (
-        <Button text={Link} key={Links.Links.indexOf(Link)} />
+      {Links.Links.map((Link,index) => (
+        <Button text={Link} key={index} />
       ))}
     </div>
   );
