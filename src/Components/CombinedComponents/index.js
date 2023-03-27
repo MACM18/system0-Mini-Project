@@ -12,3 +12,5 @@ export { default as ArrowButton } from "./ArrowButton";
 export { default as OptionBox } from "./OptionBox";
 export { default as TagList } from "./TagList";
 export { default as DropDown } from "./DropDown";
+export { default as RatingsEditable } from "./RatingsEditable";
+export { default as Ratings } from "./Ratings";

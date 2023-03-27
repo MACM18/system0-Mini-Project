@@ -5,9 +5,16 @@ import {
   OptionBox,
   FoodItem4,
   DropDown,
+  Ratings,
   TagList,
 } from "@/Components/CombinedComponents";
 import { Options } from "@/Components";
+import {
+  AddToCartNormal,
+  AddToCartWithCurry,
+  SideBarMenu,
+  SideBarAdmin,
+} from "@/Components/CombindedAdvanced";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -18,7 +25,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="UTF-8" />
       </Head>
-      <DropDown  />
+      <SideBarAdmin />
     </>
   );
 }

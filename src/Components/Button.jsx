@@ -1,5 +1,5 @@
 import Link from "next/link";
-export default function button({ text, onClickFun }) {
+export default function Button({ text, onClickFun }) {
   return (
     <div
       className={

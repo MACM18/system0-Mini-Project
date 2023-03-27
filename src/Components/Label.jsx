@@ -1,4 +1,4 @@
-export default function label({
+export default function Label({
   text,
   width = "full",
   shadow = "black",

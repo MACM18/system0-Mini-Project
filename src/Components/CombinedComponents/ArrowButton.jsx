@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "..";
 import Image from "next/image";
-export default function ArrowButton() {
+export default function ArrowButton(props) {
   const [ArrowDirection, setArrowDirection] = useState("Right");
   let imagePath = "/Resources/Vectors/" + ArrowDirection + " Arrow.png";
   const handleClick = () => {
@@ -10,6 +10,7 @@ export default function ArrowButton() {
       : ArrowDirection == "Right"
       ? setArrowDirection("Left")
       : null;
+      props.onToggle();
   };
   return (
     <Button

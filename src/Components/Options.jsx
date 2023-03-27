@@ -1,5 +1,5 @@
 import Image from "next/image";
-export default function options({ text, opt, ClickFunc }) {
+export default function Options({ text, opt, ClickFunc }) {
   return (
     <div
       className={

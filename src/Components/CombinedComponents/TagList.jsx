@@ -1,11 +1,11 @@
 import { Tags } from "..";
-export default function TagList(List) {
+export default function TagList(props) {
   return (
     <div className={"flex flex-1 flex-row w-fit h-fit gap-10"}>
-      {List.List != undefined &&
-          List.List.map((listItem, index) => (
-            <Tags key={index} text={listItem} />
-          ))}
+      {props.tags != undefined &&
+        props.tags.map((listItem, index) => (
+          <Tags key={index} text={listItem} />
+        ))}
     </div>
   );
 }
