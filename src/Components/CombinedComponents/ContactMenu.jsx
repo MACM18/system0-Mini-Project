@@ -5,7 +5,7 @@ export default function contactMenu(email, phoneNo) {
   return (
     <div
       className={
-        "w-full h-fit p-15 rounded-lg bg-Green3 flex flex-1 flex-col gap-10 items-end"
+        "h-fit max-w-72 p-15 rounded-lg bg-Green3 flex flex-initial flex-col justify-between gap-10 items-end"
       }
     >
       <TitleBox title="Contact" />
