@@ -1,4 +1,4 @@
-import Rating from "@/Components/rating.jsx";
+import Rating from "@/Components/Rating.jsx";
 export default function foodItem({ Name, imageNumber, description, rating }) {
   return (
     <div

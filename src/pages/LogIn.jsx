@@ -1,39 +1,17 @@
-import Head from "next/head";
-import { Inter } from "next/font/google";
 import { ContactMenu, NavBox } from "@/Components/CombinedComponents";
 import { TitleBox, Label, TextBox, Button } from "@/Components";
 import { useState } from "react";
-import { useRouter } from "next/router";
-const inter = Inter({ subsets: ["latin"] });
-
-export default function Home() {
+export default function LogIn() {
   const [userName, setUserName] = useState("userName");
   const [password, setPassword] = useState("Password");
-  const [state, setState] = useState(false);
   const UserNameFunc = (event) => {
     setUserName(event.target.value);
   };
   const PasswordFunc = (event) => {
-    setPassword(event.target.value);
+    setUserName(event.target.value);
   };
-  const router = useRouter();
-  const CheckLogin = () => {
-    userName == "MACM" && password == "12345678"
-      ? setState(true)
-      : setState(false);
-    state && router.push("/Menu");
-  };
-
   return (
     <>
-      <Head>
-        <title>Welcome!</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, height=device-height"
-        />
-        <meta charSet="UTF-8" />
-      </Head>
       <div
         className={
           "bg-Green2 rounded-lg p-30 flex flex-1 flex-row justify-center gap-30 w-screen h-screen"
@@ -62,15 +40,15 @@ export default function Home() {
             <TextBox
               title="Username"
               placeholder={"Enter your user name"}
-              handleInput={UserNameFunc}
+              handleChange={UserNameFunc}
             />
             <TextBox
               title="Password"
               placeholder={"your password"}
               type="password"
-              handleInput={PasswordFunc}
+              handleChange={PasswordFunc}
             />
-            <Button text={"Log in"} onClickFun={CheckLogin} />
+            <Button text={"Log in"} />
           </div>
           <div></div>
         </div>

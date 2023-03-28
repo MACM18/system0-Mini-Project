@@ -1,4 +1,4 @@
-import Label from "./label";
+import { Label } from "..";
 export default function foodItem({ Name, imageNumber, Amount, Price }) {
   return (
     <div
@@ -27,9 +27,13 @@ export default function foodItem({ Name, imageNumber, Amount, Price }) {
       <div
         className={"flex flex-1 flex-col w-40 justify-between items-end gap-15"}
       >
-        <Label text={"Amount: " + Amount} width={"fit"} shadow={"transparent"} />
+        <Label
+          text={"Amount: " + Amount}
+          width={"fit"}
+          shadow={"transparent"}
+        />
         <Label text={"Price: " + Price} width={"fit"} shadow={"transparent"} />
       </div>
     </div>
-  );
+  )
 }
