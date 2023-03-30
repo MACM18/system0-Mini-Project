@@ -1,7 +1,14 @@
 import Rating from "@/Components/Rating.jsx";
-export default function foodItem({ Name, imageNumber, description, rating }) {
+export default function foodItem2({
+  Name,
+  imageNumber,
+  description,
+  rating,
+  MouseLeave,
+}) {
   return (
     <div
+      onMouseLeave={MouseLeave}
       className={
         "min-h-36 w-80 bg-Green1 rounded-xl border border-black shadow-md shadow-Green1 p-15 flex flex-1 flex-row gap-3.5"
       }
@@ -22,7 +29,7 @@ export default function foodItem({ Name, imageNumber, description, rating }) {
             alt={imageNumber}
           ></img>
         </div>
-          <Rating value={rating} />
+        <Rating value={rating} />
       </div>
       <div
         className={

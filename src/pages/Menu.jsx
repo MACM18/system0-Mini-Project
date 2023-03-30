@@ -1,9 +1,19 @@
 import { SideBarMenu } from "@/Components/CombindedAdvanced";
-import { FoodItem, FoodItem2 } from "@/Components/CombinedComponents";
+import {
+  FoodItem,
+  FoodItem2,
+  FoodItemCombined,
+} from "@/Components/CombinedComponents";
 import { useState } from "react";
 export default function Menu(props) {
-  const [FoodItemVisibility, setFoodItemVisibility] = useState(true);
-  const [FoodItem2Visibility, setFoodItem2Visibility] = useState(false);
+  const FoodItems = [
+    { Name: "Name1", Image: 1, Desc: "aaaaaa", Rating: 2 },
+    { Name: "Name2", Image: 2, Desc: "aaaaaab", Rating: 5 },
+    { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+    { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+    { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+    { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  ];
   return (
     <div
       className={
@@ -15,20 +25,16 @@ export default function Menu(props) {
       </div>
       <div
         className={
-          "grid-flow-dense grid-cols-5 grid bg-Green3 rounded-lg w-full h-full"
+          " grid-cols-5 grid bg-Green3 rounded-lg justify-between w-full h-full auto-cols-auto"
         }
       >
-        {props.FoodItems.map((Name, Image, Desc, Rating, index) => (
-          <>
-            <FoodItem key={index} Name={Name} imageNumber={Image} />
-            <FoodItem2
-              key={index}
-              Name={Name}
-              imageNumber={Image}
-              description={Desc}
-              rating={Rating}
-            />
-          </>
+        {FoodItems.map((item, index) => (
+          <FoodItemCombined
+            Name={item.Name}
+            imageNumber={item.Image}
+            desc={item.Desc}
+            Rating={item.Rating}
+          />
         ))}
       </div>
     </div>
