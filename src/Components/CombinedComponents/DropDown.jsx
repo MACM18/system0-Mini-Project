@@ -1,11 +1,12 @@
 import { Label } from "..";
 import Image from "next/image";
 import { useState } from "react";
-export default function DropDown(List) {
+export default function DropDown(props) {
   const [dropDownStatus, setDropDownStatus] = useState(false);
   const [imagePosition, setImagePosition] = useState("rotate-0");
   const [title, setTitle] = useState(
-    List.List != undefined ? (List.List.title = "Title") : "Title"
+    // List.List != undefined ? (List.List.title = "Title") : "Title"
+    props.Title
   );
   let image = (
     <Image
@@ -34,7 +35,7 @@ export default function DropDown(List) {
   };
   return (
     <div
-      onClick={List.List != undefined?dropDown:null}
+      onClick={props.List != undefined ? dropDown : null}
       className={
         "w-fit h-fit p-15 bg-Green1 shadow-lg shadow-black rounded-lg flex flex-1 flex-col gap-15"
       }
@@ -55,8 +56,8 @@ export default function DropDown(List) {
       {dropDownStatus && <div className={"border-b-2 w-full"}></div>}
       {dropDownStatus && (
         <div className={"h-fit p-10 flex flex-1 flex-col"}>
-          {List != undefined &&
-            List.List.map((ListItem, index) => (
+          {props.List != undefined &&
+            props.List.map((ListItem, index) => (
               <Label
                 key={index}
                 text={ListItem}

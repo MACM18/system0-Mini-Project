@@ -1,41 +1,44 @@
 import { SideBarMenu } from "@/Components/CombindedAdvanced";
-import {
-  FoodItem,
-  FoodItem2,
-  FoodItemCombined,
-} from "@/Components/CombinedComponents";
-import { useState } from "react";
+import { FoodItemCombined } from "@/Components/CombinedComponents";
 export default function Menu(props) {
-  const FoodItems = [
-    { Name: "Name1", Image: 1, Desc: "aaaaaa", Rating: 2 },
-    { Name: "Name2", Image: 2, Desc: "aaaaaab", Rating: 5 },
-    { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
-    { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
-    { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
-    { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
-  ];
+  // const FoodItems = [
+  //   { Name: "Name1", Image: 1, Desc: "aaaaaa", Rating: 2 },
+  //   { Name: "Name2", Image: 2, Desc: "aaaaaab", Rating: 5 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  // ];
   return (
     <div
       className={
-        "bg-Green2 w-full h-full rounded-lg flex flex-1 flex-row gap-15"
+        "bg-Green2 w-full h-screen rounded-lg flex flex-1 flex-row gap-15"
       }
     >
-      <div className={"w-1/3 h-full"}>
+      <div className={"w-fit h-full"}>
         <SideBarMenu />
       </div>
       <div
         className={
-          " grid-cols-5 grid bg-Green3 rounded-lg justify-between w-full h-full auto-cols-auto"
+          "flex flex-1 flex-row flex-wrap place-items-center gap-x-15 bg-Green3 rounded-lg justify-around gap-y-15 w-full h-full "
         }
       >
-        {FoodItems.map((item, index) => (
-          <FoodItemCombined
-            Name={item.Name}
-            imageNumber={item.Image}
-            desc={item.Desc}
-            Rating={item.Rating}
-          />
-        ))}
+        {props.FoodItems != undefined &&
+          props.FoodItems.map((item, index) => (
+            <FoodItemCombined
+              key={index}
+              Name={item.Name}
+              imageNumber={item.Image}
+              desc={item.Desc}
+              Rating={item.Rating}
+            />
+          ))}
       </div>
     </div>
   );

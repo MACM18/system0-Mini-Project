@@ -6,6 +6,8 @@ export default function TextBox({
   type = "Text",
   handleChange,
   handleInput,
+  OnClick,
+  MouseLeave,
 }) {
   return (
     <div
@@ -21,6 +23,8 @@ export default function TextBox({
         value={value}
         onChange={handleChange}
         onInput={handleInput}
+        onClick={OnClick}
+        onMouseLeave={MouseLeave}
       ></input>
     </div>
   );

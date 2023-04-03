@@ -1,7 +1,7 @@
-export default function foodItem({ Name, imageNumber, MouseOver }) {
+export default function foodItem({ Name, imageNumber, ClickFun }) {
   return (
     <div
-      onMouseOver={MouseOver}
+      onClick={ClickFun}
       className={
         "min-w-28 min-h-36 max-w-fit bg-Green1 rounded-xl border border-black shadow-md shadow-Green1 p-15 flex  flex-1 flex-col gap-3.5"
       }
