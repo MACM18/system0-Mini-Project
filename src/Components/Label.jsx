@@ -9,7 +9,7 @@ export default function Label({
       className={
         "w-" +
         width +
-        " h-fit bg-white border border-Green1 rounded-xl px-30 py-15 shadow-md shadow-" +
+        " h-fit bg-white border border-Green1 rounded-xl px-10 py-5 shadow-md shadow-" +
         shadow
       }
       onClick={handleClick}

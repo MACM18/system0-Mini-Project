@@ -3,13 +3,13 @@ export default function Options({ text, opt, ClickFunc }) {
   return (
     <div
       className={
-        "bg-Green1 group rounded-lg shadow-inner shadow-black p-15 flex flex-1 flex-row gap-15 w-auto h-auto items-center"
+        "bg-Green1 group rounded-lg shadow-inner shadow-black p-5 flex flex-1 flex-row gap-15 w-auto h-auto items-center"
       }
       onClick={ClickFunc}
     >
       <div
         className={
-          "h-10 w-10 border border-black cursor-pointer rounded-lg bg-white flex flex-initial flex-row justify-around items-center"
+          "h-8 w-10 border border-black cursor-pointer rounded-lg bg-white flex flex-initial flex-row justify-around items-center"
         }
       >
         {opt}

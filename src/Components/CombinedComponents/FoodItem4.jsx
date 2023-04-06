@@ -1,7 +1,7 @@
 import { TextArea, Button, TextBox, TitleBox, Tags } from "..";
 import { TagList } from "@/Components/CombinedComponents";
 
-export default function FoodItem4({ Name, imageNumber, List }) {
+export default function FoodItem4(props) {
   return (
     <div
       className={
@@ -15,28 +15,28 @@ export default function FoodItem4({ Name, imageNumber, List }) {
           }
         >
           <img
-            src="../src/+{imageNumber}"
+            src="../src/+{props.imageNumber}"
             className={"w-full h-full"}
-            alt={imageNumber}
+            alt={props.imageNumber}
           ></img>
         </div>
-        <TitleBox title={Name} />
-        <Button text={"Cancel"} />
+        <TitleBox title={props.Name} />
+        <Button text={"Cancel"} onClickFun={props.CancelFunc} />
       </div>
       <div className={"w-full h-full flex flex-1 flex-col gap-15"}>
         <TextBox title={"New Name"} />
+        <TextBox title={"Image name"} />
         <TextArea description={"Description"} />
         <TextBox title={"Price"} />
       </div>
       <div
         className={"w-full flex flex-1 justify-start flex-row gap-15 max-h-fit"}
       >
-        <TagList List={List} />
-        <Tags text={"+"} />
+        <TagList tags={props.List} />
       </div>
       <div className={"w-full h-fit flex flex-1 flex-row justify-between"}>
-        <Button text={"Remove"} />
-        <Button text={"Update"} />
+        <Button text={"Remove"} onClickFun={props.RemoveFunc} />
+        <Button text={"Update"} onClickFun={props.UpdateFunc} />
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import { ContactMenu, NavBox } from "@/Components/CombinedComponents";
 import { TitleBox, Label, TextBox, Button } from "@/Components";
 import { useState } from "react";
 import { useRouter } from "next/router";
-const inter = Inter({ subsets: ["latin"] });
+//const inter = inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [userName, setUserName] = useState("userName");

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
-export default function RatingsEditable() {
-  const [rating, setRating] = useState(0);
+export default function RatingsEditable(props) {
+  const [rating, setRating] = useState(props.Rating);
   const starFilled = (
     <Image
       src={"/Resources/Vectors/Star Filled.png"}

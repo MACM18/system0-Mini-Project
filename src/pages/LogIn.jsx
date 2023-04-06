@@ -1,6 +1,7 @@
 import { ContactMenu, NavBox } from "@/Components/CombinedComponents";
 import { TitleBox, Label, TextBox, Button } from "@/Components";
 import { useState } from "react";
+import Head from "next/head";
 export default function LogIn() {
   const [userName, setUserName] = useState("userName");
   const [password, setPassword] = useState("Password");
@@ -8,33 +9,40 @@ export default function LogIn() {
     setUserName(event.target.value);
   };
   const PasswordFunc = (event) => {
-    setUserName(event.target.value);
+    setPassword(event.target.value);
   };
   return (
     <>
+      <Head>
+        <title>Welcome</title>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, height=device-height"
+        />
+        <meta charSet="UTF-8" />
+      </Head>
       <div
         className={
-          "bg-Green2 rounded-lg p-30 flex flex-1 flex-row justify-center gap-30 w-screen h-screen"
+          "bg-Green2 w-screen h-screen flex flex-auto flex-row gap-15 p-15"
         }
       >
         <div
           className={
-            "bg-white grow-0 h-full rounded-lg p-15 flex flex-1 flex-col justify-end"
+            "bg-white w-1/4 h-full rounded-lg flex flex-col justify-end p-10"
           }
         >
           <ContactMenu email={"123@abc.lk"} phoneNo={"0123456789"} />
         </div>
         <div
           className={
-            "w-full h-full bg-white rounded-lg p-15 flex flex-1 flex-col gap-30"
+            "bg-white w-full h-full rounded-lg p-10 flex flex-col gap-30"
           }
         >
           <TitleBox title={"Canteen Food ordering"} />
           <Label text={"Log in"} />
-
           <div
             className={
-              "w-full h-fit p-30 bg-Green3 rounded-lg flex flex-initial flex-col gap-30 items-end"
+              "bg-Green3 p-15 rounded-lg flex flex-col gap-15 items-end"
             }
           >
             <TextBox
@@ -50,9 +58,8 @@ export default function LogIn() {
             />
             <Button text={"Log in"} />
           </div>
-          <div></div>
         </div>
-        <div className={"w-fit h-full "}>
+        <div>
           <NavBox Links={["Menu", "Register"]} />
         </div>
       </div>
