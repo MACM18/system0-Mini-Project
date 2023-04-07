@@ -1,5 +1,9 @@
 import Image from "next/image";
+import { useState } from "react";
+import TitleBox from "../TitleBox";
+import RemoveConfirmation from "./RemoveConfirmation";
 export default function foodItem({ Name, imageNumber }) {
+  const [visibility, setVisibility] = useState(false);
   return (
     <div
       className={
@@ -10,10 +14,10 @@ export default function foodItem({ Name, imageNumber }) {
         className={
           "w-6 h-6 bg-Red text-black rounded-full shadow-sm shadow-black flex flex-auto p-2 justify-center hover:shadow-none"
         }
+        onClick={() => setVisibility(true)}
       >
-        <Image className={
-          'hover:fill-white'
-        }
+        <Image
+          className={"hover:fill-white"}
           src={"/Resources/Vectors/x.png"}
           alt={"x"}
           width={12}
@@ -34,6 +38,9 @@ export default function foodItem({ Name, imageNumber }) {
       <div className={"w-auto h-auto "}>
         <p className={"font-medium text-center text-lg"}>{Name}</p>
       </div>
+      {visibility && (
+        <RemoveConfirmation BackFunc={() => setVisibility(false)} />
+      )}
     </div>
   );
 }

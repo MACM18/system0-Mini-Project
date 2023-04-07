@@ -1,14 +1,27 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
-import { ContactMenu, NavBox } from "@/Components/CombinedComponents";
+import {
+  AlertItemAdded,
+  AlertOrderPlaced,
+  ContactMenu,
+  NavBox,
+  OrderConfirmation,
+} from "@/Components/CombinedComponents";
 import { TitleBox, Label, TextBox, Button } from "@/Components";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import {
+  OrderConfirmationPage,
+  OrderDetails,
+} from "@/Components/CombindedAdvanced";
+import ItemOrganizer from "@/Components/CombindedAdvanced/ItemOrganizer";
+import { render } from "react-dom";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [userName, setUserName] = useState("userName");
   const [password, setPassword] = useState("Password");
+  const [visibility, setVisibility] = useState(false);
   const [state, setState] = useState(false);
   const UserNameFunc = (event) => {
     setUserName(event.target.value);
@@ -35,49 +48,28 @@ export default function Home() {
         <meta charSet="UTF-8" />
       </Head>
       <div
-        className={
-          "bg-Green2 rounded-lg p-30 flex flex-1 flex-row justify-center gap-30 w-screen h-screen"
-        }
+        onClick={() => {
+          setVisibility(true);
+          setTimeout(() => {
+            setVisibility(false);
+          }, 2500);
+        }}
       >
-        <div
-          className={
-            "bg-white grow-0 h-full rounded-lg p-15 flex flex-1 flex-col justify-end"
-          }
-        >
-          <ContactMenu email={"123@abc.lk"} phoneNo={"0123456789"} />
-        </div>
-        <div
-          className={
-            "w-full h-full bg-white rounded-lg p-15 flex flex-1 flex-col gap-30"
-          }
-        >
-          <TitleBox title={"Canteen Food ordering"} />
-          <Label text={"Log in"} />
-
-          <div
-            className={
-              "w-full h-fit p-30 bg-Green3 rounded-lg flex flex-initial flex-col gap-30 items-end"
-            }
-          >
-            <TextBox
-              title="Username"
-              placeholder={"Enter your user name"}
-              handleInput={UserNameFunc}
-            />
-            <TextBox
-              title="Password"
-              placeholder={"your password"}
-              type="password"
-              handleInput={PasswordFunc}
-            />
-            <Button text={"Log in"} onClickFun={CheckLogin} />
-          </div>
-          <div></div>
-        </div>
-        <div className={"w-fit h-full "}>
-          <NavBox Links={["Menu", "Register"]} />
-        </div>
+        aaaaa
+        {visibility && <AlertItemAdded Name="aaa" />}
       </div>
+      <OrderConfirmationPage
+        order={[
+          { Name: "Food1", Image: "abc", Amount: 2, Price: 200 },
+          { Name: "Food2", Image: "abcd", Amount: 2, Price: 300 },
+          { Name: "Food3", Image: "abcde", Amount: 1, Price: 50 },
+        ]}
+        ID={"1000"}
+        Date={"01.01.2023"}
+        Name={"MACM"}
+        tags={[1, 2, 3, 4]}
+        Total={550}
+      />
     </>
   );
 }

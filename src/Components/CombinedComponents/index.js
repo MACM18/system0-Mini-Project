@@ -16,3 +16,8 @@ export { default as DropDown } from "./DropDown";
 export { default as RatingsEditable } from "./RatingsEditable";
 export { default as Ratings } from "./Ratings";
 export { default as AdminFooditemVarients } from "./AdminFooditemVarients";
+export { default as RemoveConfirmation } from "./RemoveConfirmation";
+export { default as OrderConfirmation } from "./OrderConfirmation";
+export { default as AlertOrderPlaced } from "./AlertOrderPlaced";
+export { default as AlertItemRemoved } from "./AlertItemRemoved";
+export { default as AlertItemAdded } from "./AlertItemAdded";
