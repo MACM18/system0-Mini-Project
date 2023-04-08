@@ -5,7 +5,6 @@ export default function DropDown(props) {
   const [dropDownStatus, setDropDownStatus] = useState(false);
   const [imagePosition, setImagePosition] = useState("rotate-0");
   const [title, setTitle] = useState(
-    // List.List != undefined ? (List.List.title = "Title") : "Title"
     props.Title
   );
   let image = (
@@ -37,7 +36,7 @@ export default function DropDown(props) {
     <div
       onClick={props.List != undefined ? dropDown : null}
       className={
-        "w-fit h-fit p-15 bg-Green1 shadow-lg shadow-black rounded-lg flex flex-1 flex-col gap-15"
+        "w-fit h-fit p-5 bg-Green1 shadow-lg shadow-black rounded-lg flex flex-1 flex-col gap-5"
       }
     >
       <div
@@ -55,7 +54,7 @@ export default function DropDown(props) {
       </div>
       {dropDownStatus && <div className={"border-b-2 w-full"}></div>}
       {dropDownStatus && (
-        <div className={"h-fit p-10 flex flex-1 flex-col"}>
+        <div className={"h-fit p-5 flex flex-1 flex-col"}>
           {props.List != undefined &&
             props.List.map((ListItem, index) => (
               <Label

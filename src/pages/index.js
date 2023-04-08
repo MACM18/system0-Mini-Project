@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import {
   OrderConfirmationPage,
   OrderDetails,
+  OrderSummary,
 } from "@/Components/CombindedAdvanced";
 import ItemOrganizer from "@/Components/CombindedAdvanced/ItemOrganizer";
 import { render } from "react-dom";
@@ -58,17 +59,12 @@ export default function Home() {
         aaaaa
         {visibility && <AlertItemAdded Name="aaa" />}
       </div>
-      <OrderConfirmationPage
-        order={[
-          { Name: "Food1", Image: "abc", Amount: 2, Price: 200 },
-          { Name: "Food2", Image: "abcd", Amount: 2, Price: 300 },
-          { Name: "Food3", Image: "abcde", Amount: 1, Price: 50 },
-        ]}
-        ID={"1000"}
-        Date={"01.01.2023"}
-        Name={"MACM"}
-        tags={[1, 2, 3, 4]}
-        Total={550}
+      <OrderSummary
+        TotalAmount={100}
+        Canceled={10}
+        Completed={50}
+        Remaining={20}
+        Abandoned={15}
       />
     </>
   );

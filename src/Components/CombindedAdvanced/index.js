@@ -5,3 +5,4 @@ export { default as SideBarAdmin } from "./SideBarAdmin";
 export { default as SideBarUser } from "./SideBarUser";
 export { default as OrderDetails } from "./OrderDetails";
 export { default as OrderConfirmationPage } from "./OrderConfimationPage";
+export { default as OrderSummary } from "./OrderSummary";

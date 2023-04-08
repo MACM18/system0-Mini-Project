@@ -1,11 +1,11 @@
 import Image from "next/image";
-export default function foodItem5({ Name, imageNumber, ClickFunc }) {
+export default function foodItem5({ onClickFunc }) {
   return (
     <div
       className={
-        "w-28 h-36  bg-Green1 rounded-xl border cursor-pointer border-black shadow-md shadow-Green1 p-15 flex  flex-1 flex-col justify-center hover:shadow-none"
+        "min-w-28 min-h-36 max-w-fit bg-Green1 rounded-xl border cursor-pointer border-black shadow-md shadow-Green1 p-15 flex  flex-1 flex-col justify-center hover:shadow-none"
       }
-      onClick={ClickFunc}
+      onClick={onClickFunc}
     >
       <div
         className={
