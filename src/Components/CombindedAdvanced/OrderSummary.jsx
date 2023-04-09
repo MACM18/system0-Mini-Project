@@ -10,7 +10,7 @@ export default function OrderSummary(props) {
     <div>
       <div
         className={
-          "flex flex-auto flex-row w-auto justify-between p-15 bg-Green2 rounded-lg m-2"
+          "flex flex-auto flex-row w-auto justify-between p-15 bg-Green2 rounded-lg "
         }
       >
         <Label text={"Total Orders"} width="fit" />
