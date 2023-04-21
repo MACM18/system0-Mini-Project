@@ -1,8 +1,10 @@
 import { ArrowButton, OptionBox, ContactMenu } from "../CombinedComponents";
 import { TitleBox, Button } from "..";
 import { useState } from "react";
+import { useRouter } from "next/router";
 export default function SideBarMenu() {
   const [menuStatus, setMenuStatus] = useState(false);
+  const router = useRouter();
   return (
     <div className={"flex flex-1 flex-col gap-10 justify-between p-15"}>
       <div
@@ -26,13 +28,23 @@ export default function SideBarMenu() {
           }
         >
           <OptionBox
-            List={["Order History", "Reviews", "Settings", "Food menu"]}
+            List={[
+              { Text: "Order History", Link: "../OrderHistoryUser" },
+              { Text: "Reviews", Link: "../ReviewsUser" },
+              { Text: "Settings", Link: "" },
+              { Text: "Food menu", Link: "../Menu" },
+            ]}
           />
         </div>
       )}
       {menuStatus && (
         <div className="flex flex-1 flex-row justify-end">
-          <Button text={"Log Out"} />
+          <Button
+            text={"Log Out"}
+            onClickFun={() => {
+              router.push("../LogIn");
+            }}
+          />
         </div>
       )}
       {menuStatus && <ContactMenu />}

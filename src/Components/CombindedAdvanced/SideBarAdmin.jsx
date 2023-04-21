@@ -1,8 +1,10 @@
 import { ArrowButton, OptionBox } from "../CombinedComponents";
 import { TitleBox, Button } from "..";
 import { useState } from "react";
+import { useRouter } from "next/router";
 export default function SideBarMenu() {
   const [menuStatus, setMenuStatus] = useState(false);
+  const router = useRouter();
   return (
     <div className={"flex flex-1 flex-col gap-10 justify-between p-15"}>
       <div
@@ -25,7 +27,9 @@ export default function SideBarMenu() {
             "flex flex-1 flex-col justifybetween gap-10 p-15 bg-Green2 rounded-lg shadow-inner shadow-black"
           }
         >
-          <OptionBox List={["Dash Board"]} />
+          <OptionBox
+            List={[{ Text: "Dash Board", Link: "../AdminDashboard" }]}
+          />
         </div>
       )}
       {menuStatus && (
@@ -35,7 +39,12 @@ export default function SideBarMenu() {
           }
         >
           <TitleBox title={"Food"} />
-          <OptionBox List={["Food menu", "Availability"]} />
+          <OptionBox
+            List={[
+              { Text: "Food menu", Link: "../AdminFoodItems" },
+              { Text: "Acailability", Link: "../AdminFoodAvailability" },
+            ]}
+          />
         </div>
       )}
       {menuStatus && (
@@ -45,12 +54,23 @@ export default function SideBarMenu() {
           }
         >
           <TitleBox title={"Orders"} />
-          <OptionBox List={["Orders-Available", "Search", "Payments"]} />
+          <OptionBox
+            List={[
+              { Text: "Orders - Available", Link: "../AdminCurrentOrders" },
+              { Text: "Search", Link: "../AdminSearch" },
+              { Text: "Payments", Link: "../AdminPayments" },
+            ]}
+          />
         </div>
       )}
       {menuStatus && (
         <div className="flex flex-1 flex-row justify-end">
-          <Button text={"Log Out"} />
+          <Button
+            text={"Log Out"}
+            onClickFun={() => {
+              router.push("../LogIn");
+            }}
+          />
         </div>
       )}
     </div>

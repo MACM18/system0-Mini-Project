@@ -33,7 +33,7 @@ export default function Menu(props) {
         <SideBarUser />
       </div>
       <div className="bg-white w-full h-full rounded-lg p-15 flex flex-1 flex-col gap-15">
-        <TitleBox title={"Order History"} />
+        <TitleBox title={"Reviews"} />
         <div
           className={
             "flex flex-1 flex-row gap-10 p-10 bg-Green3 rounded-lg items-center"

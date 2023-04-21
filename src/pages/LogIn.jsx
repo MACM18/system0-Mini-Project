@@ -11,6 +11,7 @@ export default function LogIn() {
   const PasswordFunc = (event) => {
     setPassword(event.target.value);
   };
+  function checkData() {}
   return (
     <>
       <Head>
@@ -56,11 +57,16 @@ export default function LogIn() {
               type="password"
               handleChange={PasswordFunc}
             />
-            <Button text={"Log in"} />
+            <Button text={"Log in"} onClickFun={checkData} />
           </div>
         </div>
         <div>
-          <NavBox Links={["Menu", "Register"]} />
+          <NavBox
+            Links={[
+              { Text: "Menu", Link: "../Menu" },
+              { Text: "Register", Link: "../Register" },
+            ]}
+          />
         </div>
       </div>
     </>

@@ -20,15 +20,35 @@ export default function SideBarMenu() {
         {menuStatus && <TitleBox title={"Menu"} />}
       </div>
       {menuStatus && (
-        <div className={'flex flex-1 flex-col justifybetween gap-10 p-15 bg-Green2 rounded-lg shadow-inner shadow-black'}>
+        <div
+          className={
+            "flex flex-1 flex-col justifybetween gap-10 p-15 bg-Green2 rounded-lg shadow-inner shadow-black"
+          }
+        >
           <TitleBox title={"Time"} />
-          <OptionBox List={[1, 2, 3]} />
+          <OptionBox
+            List={[
+              { Text: "1", Link: "../" },
+              { Text: "2", Link: "../" },
+              { Text: "3", Link: "../" },
+            ]}
+          />
         </div>
       )}
       {menuStatus && (
-        <div className={'flex flex-1 flex-col justifybetween gap-10 p-15 bg-Green2 rounded-lg shadow-inner shadow-black'}>
+        <div
+          className={
+            "flex flex-1 flex-col justifybetween gap-10 p-15 bg-Green2 rounded-lg shadow-inner shadow-black"
+          }
+        >
           <TitleBox title={"Type"} />
-          <OptionBox List={[1, 2, 3, 4]} />
+          <OptionBox
+            List={[
+              { Text: "1", Link: "../" },
+              { Text: "2", Link: "../" },
+              { Text: "3", Link: "../" },
+            ]}
+          />
         </div>
       )}
       {menuStatus && (

@@ -86,7 +86,12 @@ export default function LogIn() {
         </div>
       </div>
       <div>
-        <NavBox Links={["Menu", "LogIn"]} />
+        <NavBox
+          Links={[
+            { Text: "Menu", Link: "../Menu" },
+            { Text: "LogIn", Link: "../LogIn" },
+          ]}
+        />
       </div>
     </div>
   );

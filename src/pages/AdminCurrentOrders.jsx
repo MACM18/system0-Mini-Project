@@ -58,22 +58,22 @@ export default function AdminCurrentOrders(props) {
         </div>
         <TitleBox title={"Breakfast"} />
         <div className={"flex p-10 flex-row justify-between overflow-x-auto"}>
-          {props.Breakfast != undefined &&
-            props.Breakfast.map((item, index) => (
+          {BreakfastCounter != undefined &&
+            BreakfastCounter.map((item, index) => (
               <Counter key={index} text={item.Name} amount={item.Count} />
             ))}
         </div>
         <TitleBox title={"Current Orders"} />
         <div className={"flex p-10 flex-row justify-between overflow-x-auto"}>
-          {props.Lunch != undefined &&
-            props.Lunch.map((item, index) => (
+          {LunchCounter != undefined &&
+            LunchCounter.map((item, index) => (
               <Counter key={index} text={item.Name} amount={item.Count} />
             ))}
         </div>
         <TitleBox title={"Current Orders"} />
         <div className={"flex p-10 flex-row justify-between overflow-x-auto"}>
-          {props.Snack != undefined &&
-            props.Snack.map((item, index) => (
+          {SnackAndRestCounter != undefined &&
+            SnackAndRestCounter.map((item, index) => (
               <Counter key={index} text={item.Name} amount={item.Count} />
             ))}
         </div>
