@@ -1,17 +1,17 @@
+import Order from "@/Database/models/Orders";
 import connectDb from "../../../Database/Temp/db";
-import User from "../../../Database/models/user";
 
 const handler = async (req, res) => {
   if (req.method === "POST" && req.query.Method === "Find") {
     try {
       await connectDb();
-      let users;
+      let orders;
       if (req.body == "") {
-        users = await User.find({});
+        orders = await Order.find({});
       } else {
-        users = await User.find(req.body);
+        orders = await Order.find(req.body);
       }
-      res.status(200).json(users);
+      res.status(200).json(orders);
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
@@ -19,16 +19,18 @@ const handler = async (req, res) => {
   } else if (req.method === "POST" && req.query.Method === "Insert") {
     try {
       await connectDb();
-      const { Name, Email, Type, PhoneNo, UserName } = req.body;
-      const newUser = new User({
-        Name,
-        Email,
-        Type,
-        PhoneNo,
+      const { UserName, Time, Date, Price, Status, Items, Meal } = req.body;
+      const newOrder = new Order({
         UserName,
+        Time,
+        Date,
+        Price,
+        Status,
+        Items,
+        Meal,
       });
-      const user = await newUser.save();
-      res.status(200).json(user);
+      const orders = await newOrder.save();
+      res.status(200).json(orders);
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
@@ -39,29 +41,35 @@ const handler = async (req, res) => {
       const { Selection, value, Fields } = req.body;
       let filter;
       switch (Selection) {
-        case "Name":
-          filter = { Name: value };
-          break;
-        case "Email":
-          filter = { Email: value };
-          break;
-        case "Type":
-          filter = { Type: value };
-          break;
-        case "PhoneNo":
-          filter = { PhoneNo: value };
-          break;
         case "UserName":
           filter = { UserName: value };
           break;
+        case "Time":
+          filter = { Time: value };
+          break;
+        case "Date":
+          filter = { Date: value };
+          break;
+        case "Price":
+          filter = { Price: value };
+          break;
+        case "Status":
+          filter = { Status: value };
+          break;
+        case "Items":
+          filter = { Items: value };
+          break;
+        case "Meal":
+          filter = { Meal: value };
+          break;
         default:
-          filter = { UserName: value };
+          filter = { _id: value };
           break;
       }
       const updateDoc = {
         $set: Fields,
       };
-      const result = await User.updateMany(filter, updateDoc);
+      const result = await Order.updateMany(filter, updateDoc);
       console.log(`Updated ${result.modifiedCount} documents`);
       res.status(200).json("Updated");
     } catch (err) {
@@ -71,13 +79,13 @@ const handler = async (req, res) => {
   } else if (req.method === "DELETE") {
     try {
       await connectDb();
-      User.deleteMany(req.body).then((result) => {
+      Order.deleteMany(req.body).then((result) => {
         console.log(`Deleted ${result.deletedCount} documents`);
       });
       res.status(200).json("Deleted");
     } catch (err) {
       console.error(err.message);
-      res.status(500).send(req.body);
+      res.status(500).send("Server Error");
     }
   }
 };

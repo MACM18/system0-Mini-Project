@@ -14,6 +14,8 @@ export default function FoodItemCombined({
       Fourth: ["A"],
     },
   ],
+  Price,
+  Tags,
 }) {
   const [varient, setVarient] = useState(0);
   return (
@@ -35,7 +37,7 @@ export default function FoodItemCombined({
           rating={Rating}
           ClickFun={() => setVarient(0)}
           AddToCartFunc={() => {
-            Curry == undefined || Curry == "" ? setVarient(3) : setVarient(3);
+            Curry == undefined || Curry == "" ? setVarient(2) : setVarient(2);
           }}
         />
       )}
@@ -43,8 +45,9 @@ export default function FoodItemCombined({
         <AddToCartNormal
           FoodName={Name}
           Description={desc}
-          Tags={[1, 2, 3]}
+          Tags={Tags}
           ImageName={Image}
+          Price={Price}
           CloseButtonFunc={() => setVarient(1)}
         />
       )}
@@ -52,9 +55,10 @@ export default function FoodItemCombined({
         <AddToCartWithCurry
           FoodName={Name}
           Description={desc}
-          Tags={[1, 2, 3]}
+          Tags={Tags}
           ImageName={Image}
-          Curry={Curry}
+          // Curry={Curry}
+          Price={Price}
           CloseButtonFunc={() => setVarient(1)}
         />
       )}

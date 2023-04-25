@@ -33,7 +33,7 @@ export default function AddToCartWithCurry(props) {
           <TagList tags={props.tags} />
           <TextArea description={props.Description} />
 
-          <div className="flex flex-1 flex-row gap-15 justify-between w-full h-fit">
+          {/* <div className="flex flex-1 flex-row gap-15 justify-between w-full h-fit">
             {props.Curry != undefined &&
               props.Curry.map((CurryItem, index) => (
                 <>
@@ -43,7 +43,7 @@ export default function AddToCartWithCurry(props) {
                   <DropDown Title="Fourth" List={CurryItem.Fourth} />
                 </>
               ))}
-          </div>
+          </div> */}
         </div>
 
         <Image

@@ -1,12 +1,46 @@
+import axios from "axios";
 import { TitleBox, TextArea, Label, Button } from "..";
 import { ItemCounter, TagList } from "../CombinedComponents";
 import Image from "next/image";
 import { useState } from "react";
+// import Cart from "@/Database/models/Cart";
 export default function AddToCartNormal(props) {
   const [total, setTotal] = useState(props.Price);
+  const [amount, setAmount] = useState(1);
   const calcPrice = (amount) => {
     setTotal(amount * props.Price);
+    setAmount(amount);
   };
+  async function AddToCart() {
+    let data = {
+      UserName: localStorage.getItem("CurrentUser"),
+      Status: "Pending",
+      Items: [{ Name: props.FoodName, Amount: amount, Price: total }],
+    };
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: "http://localhost:3000/api/Cart/?Method=Insert",
+      headers: {},
+      data: data,
+    };
+    const response = await axios(config);
+    localStorage.setItem("CartID", await response.data._id);
+    let data2 = {
+      id: localStorage.getItem("CartID"),
+      newItems: [{ Name: props.FoodName, Amount: amount, Price: total }],
+    };
+    let config2 = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: "http://localhost:3000/api/Cart/special",
+      headers: {},
+      data: data2,
+    };
+    const response2 = await axios(config2);
+    const Items = await response2.data;
+    console.log(Items);
+  }
   return (
     <div
       className={
@@ -50,7 +84,7 @@ export default function AddToCartNormal(props) {
           <ItemCounter onUpdate={calcPrice} />
         </div>
         <Label text={"Rs. " + total + ".00"} width="fit" />
-        <Button text={"ADD to Cart"} />
+        <Button text={"ADD to Cart"} onClickFun={AddToCart} />
       </div>
     </div>
   );

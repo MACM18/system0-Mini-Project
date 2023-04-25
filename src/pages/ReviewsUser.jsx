@@ -7,22 +7,24 @@ import {
   TagList,
 } from "@/Components/CombinedComponents";
 import { useState } from "react";
+
 export default function Menu(props) {
-  const FoodItems = [
-    { Name: "Name1", Image: 1, Desc: "aaaaaa", Rating: 2 },
-    { Name: "Name2", Image: 2, Desc: "aaaaaab", Rating: 5 },
-    { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
-    { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
-    { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
-    { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
-    { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
-    { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
-    { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
-    { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
-    { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
-    { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
-  ];
+  // const FoodItems = [
+  //   { Name: "Name1", Image: 1, Desc: "aaaaaa", Rating: 2 },
+  //   { Name: "Name2", Image: 2, Desc: "aaaaaab", Rating: 5 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
+  // ];
   const [serchBoxState, setSearchBoxState] = useState(true);
+
   return (
     <div
       className={
@@ -59,17 +61,17 @@ export default function Menu(props) {
           <Button text={"Search"} />
         </div>
         <div className={"w-full h-full overflow-y-scroll"}>
-          {FoodItems != undefined &&
-            FoodItems.map((item, index) => (
-              <div className={"bg-Green3 rounded-lg p-10 m-2"}>
+          {props.FoodItems != undefined &&
+            props.FoodItems.map((item) => (
+              <div className={"bg-Green3 rounded-lg p-10 m-2"} key={item._id}>
                 <div
                   className={
                     "w-full h-fit p-10 bg-white rounded-lg flex flex-initial items-end justify-between gap-10"
                   }
                 >
                   <FoodItem Name={item.Name} imageNumber={item.Image} />
-                  <Label text={item.Desc} width={"fit"} />
-                  <TagList tags={item.tags} width={"fit"} />
+                  <Label text={item.Description} width={"fit"} />
+                  <TagList tags={item.Tags} width={"fit"} />
                   <div>
                     <RatingsEditable Rating={item.Rating} />
                   </div>
@@ -81,3 +83,21 @@ export default function Menu(props) {
     </div>
   );
 }
+const axios = require("axios");
+let config = {
+  method: "post",
+  maxBodyLength: Infinity,
+  url: "http://localhost:3000/api/FoodItem/?Method=Find",
+  headers: {},
+  data: {},
+};
+export const getStaticProps = async () => {
+  try {
+    const response = await axios(config);
+    const FoodItems = await response.data;
+    return { props: { FoodItems } };
+  } catch (err) {
+    console.error(err.message);
+    return { props: { FoodItems: [] } };
+  }
+};

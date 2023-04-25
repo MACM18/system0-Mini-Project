@@ -1,17 +1,61 @@
-import { ContactMenu, NavBox } from "@/Components/CombinedComponents";
+import {
+  ContactMenu,
+  NavBox,
+  AlertLogIn,
+} from "@/Components/CombinedComponents";
 import { TitleBox, Label, TextBox, Button } from "@/Components";
 import { useState } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
+const axios = require("axios");
 export default function LogIn() {
+  const router = useRouter();
   const [userName, setUserName] = useState("userName");
   const [password, setPassword] = useState("Password");
+  const [alertSuccess, setAlertSuccess] = useState(false);
+  const [alertInvalid, setAlertInvalid] = useState(false);
   const UserNameFunc = (event) => {
     setUserName(event.target.value);
   };
   const PasswordFunc = (event) => {
     setPassword(event.target.value);
   };
-  function checkData() {}
+  async function checkData() {
+    let data = {
+      UserName: userName,
+      Password: password,
+    };
+    console.log(data);
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: "http://localhost:3000/api/LogIn/?Method=Find",
+      headers: {},
+      data: data,
+    };
+
+    const response = await axios(config);
+    const details = await response.data;
+    console.log(details);
+    if (
+      (details[0] != undefined &&
+        details[0] != undefined &&
+        details[0].UserName) == userName &&
+      details[0].Password == password
+    ) {
+      localStorage.setItem("CurrentUser", details[0].UserName);
+      setAlertSuccess(true);
+      setTimeout(() => {
+        setAlertSuccess(false);
+      }, 1000);
+      router.push("./Menu/");
+    } else {
+      setAlertInvalid(true);
+      setTimeout(() => {
+        setAlertInvalid(false);
+      }, 1000);
+    }
+  }
   return (
     <>
       <Head>
@@ -46,6 +90,9 @@ export default function LogIn() {
               "bg-Green3 p-15 rounded-lg flex flex-col gap-15 items-end"
             }
           >
+            {/* <div id="invalid" className="hidden"></div> */}
+            {alertSuccess && <AlertLogIn Status="Success" id="success" />}
+            {alertInvalid && <AlertLogIn Status="Faild" id="invalid" />}
             <TextBox
               title="Username"
               placeholder={"Enter your user name"}

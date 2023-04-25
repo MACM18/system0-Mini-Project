@@ -52,12 +52,12 @@ export default function Menu(props) {
           <Button text={"Search"} />
         </div>
         <div className={"w-full h-full"}>
-          {props.FoodItems != undefined &&
-            props.Orders.map((order, index) => (
+          {props.Orders != undefined &&
+            props.Orders.map((order) => (
               <div className={"w-full h-fit p-10 bg-white rounded-lg"}>
                 <Label text={order.Date} width={"fit"} />
                 <Label text={order.Status} />
-                <TagList tags={order.tags} width={"fit"} />
+                {/* <TagList tags={order.tags} width={"fit"} /> */}
                 <Label text={order.Amount} width={"fit"} />
               </div>
             ))}
@@ -66,3 +66,21 @@ export default function Menu(props) {
     </div>
   );
 }
+const axios = require("axios");
+let config = {
+  method: "post",
+  maxBodyLength: Infinity,
+  url: "http://localhost:3000/api/Orders/?Method=Find",
+  headers: {},
+  data: { UserName: typeof window !== 'undefined'&& localStorage.getItem("CurrentUser") },
+};
+export const getStaticProps = async () => {
+  try {
+    const response = await axios(config);
+    const Orders = await response.data;
+    return { props: { Orders } };
+  } catch (err) {
+    console.error(err.message);
+    return { props: { Orders: [] } };
+  }
+};

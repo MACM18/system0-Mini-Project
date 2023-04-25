@@ -21,3 +21,6 @@ export { default as OrderConfirmation } from "./OrderConfirmation";
 export { default as AlertOrderPlaced } from "./AlertOrderPlaced";
 export { default as AlertItemRemoved } from "./AlertItemRemoved";
 export { default as AlertItemAdded } from "./AlertItemAdded";
+export { default as AlertLogIn } from "./AlertLogIn";
+export { default as AlertSignIn } from "./AlertSignIn";
+export { default as Alert } from "./Alert";

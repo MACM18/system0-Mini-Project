@@ -19,11 +19,11 @@ export default function OrderDetails(props) {
         }
       >
         <div className={"w-5/6"}>
-          <Label text={"ID"} width="fit" />
+          <Label text={props._id} width="fit" />
         </div>
         <div className={" w-1/6 flex flex-auto flex-row gap-15 items-center"}>
-          <DropDown Title={"Status"} List={[1, 2, 3, 4]} />
-          <Label text={"Price"} width="fit" />
+          <DropDown Title={props.Status} List={[1, 2, 3, 4]} />
+          <Label text={props.Price} width="fit" />
         </div>
       </div>
       <div
@@ -31,8 +31,8 @@ export default function OrderDetails(props) {
           "h-fit bg-white p-10 rounded-lg flex flex-auto flex-row gap-15 items-center"
         }
       >
-        <Label text={"Name"} />
-        <TagList tags={props.tags} />
+        <Label text={props.Name} />
+        <TagList tags={props.Tags} />
         <Button
           text={arrow}
           onClickFun={() => {

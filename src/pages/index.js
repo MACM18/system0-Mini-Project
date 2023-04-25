@@ -14,9 +14,11 @@ import {
   OrderConfirmationPage,
   OrderDetails,
   OrderSummary,
+  Cart,
 } from "@/Components/CombindedAdvanced";
 import ItemOrganizer from "@/Components/CombindedAdvanced/ItemOrganizer";
 import { render } from "react-dom";
+// import Cart from "@/Components/CombindedAdvanced";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -37,7 +39,30 @@ export default function Home() {
       : setState(false);
     state && router.push("/Menu");
   };
-
+  const carts = {
+    UserName: "User1",
+    Status: "Pending",
+    Items: [
+      {
+        Name: "Rice & Curry",
+        Amount: 5,
+        Price: 750,
+      },
+      {
+        Name: "Rice & Curry",
+        Amount: 5,
+        Price: 750,
+      },
+      {
+        Name: "Rice & Curry",
+        Amount: 5,
+        Price: 750,
+      },
+    ],
+    _id: "6447d4dad326701acbc0b019",
+    __v: 0,
+  };
+  console.log(localStorage.getItem("CartID"));
   return (
     <>
       <Head>
@@ -65,6 +90,10 @@ export default function Home() {
         Completed={50}
         Remaining={20}
         Abandoned={15}
+      />
+      <Cart
+        Carts={carts}
+        ID={typeof window !== "undefined" && localStorage.getItem("CartID")}
       />
     </>
   );

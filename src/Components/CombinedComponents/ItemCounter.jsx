@@ -4,7 +4,7 @@ import Button from "../Button";
 import TextBox from "../TextBox";
 
 export default function ItemCounter(props) {
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(1);
   // const [visiblity, setVisisbility] = useState(false);
   const addFun = () => {
     if (amount < 100) {
@@ -15,7 +15,7 @@ export default function ItemCounter(props) {
   const subFun = () => {
     if (amount > 0) {
       setAmount(amount - 1);
-      props.onUpdate(amount + 1);
+      props.onUpdate(amount - 1);
     }
   };
   const textBoxChangeAmount = (event) => {

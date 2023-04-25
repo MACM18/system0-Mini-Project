@@ -26,21 +26,30 @@ export default function AdminFoodItems(props) {
       <div className={"w-fit h-full"}>
         <SideBarAdmin />
       </div>
-      <div className={"bg-white rounded-lg w-full p-10 flex flex-auto flex-col gap-10"}>
+      <div
+        className={
+          "bg-white rounded-lg w-full p-10 flex flex-auto flex-col gap-10"
+        }
+      >
         <TitleBox title={"Food Items"} />
         <div className={"flex flex-auto flex-row gap-10 items-center"}>
           <TextBox title="Search" placeholder={"🔍"} />
           <Button text={"Search"} />
         </div>
-        <div className={"bg-Green3 p-15 rounded-lg flex flex-wrap flex-row justify-left gap-30"}>
-          {FoodItems != undefined &&
-            FoodItems.map((item, index) => (
+        <div
+          className={
+            "bg-Green3 p-15 rounded-lg flex flex-wrap flex-row justify-left gap-30"
+          }
+        >
+          {props.FoodItems != undefined &&
+            props.FoodItems.map((item) => (
               <AdminFooditemVarients
-                key={index}
+                key={item._id}
                 Name={item.Name}
                 Image={item.Image}
-                desc={item.Desc}
+                desc={item.Description}
                 Rating={item.Rating}
+                Tags={item.Tags}
               />
             ))}
         </div>
@@ -48,3 +57,21 @@ export default function AdminFoodItems(props) {
     </div>
   );
 }
+const axios = require("axios");
+let config = {
+  method: "post",
+  maxBodyLength: Infinity,
+  url: "http://localhost:3000/api/FoodItem/?Method=Find",
+  headers: {},
+  data: {},
+};
+export const getStaticProps = async () => {
+  try {
+    const response = await axios(config);
+    const FoodItems = await response.data;
+    return { props: { FoodItems } };
+  } catch (err) {
+    console.error(err.message);
+    return { props: { FoodItems: [] } };
+  }
+};
