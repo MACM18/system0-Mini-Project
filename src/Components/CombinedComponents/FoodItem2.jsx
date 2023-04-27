@@ -12,7 +12,7 @@ export default function foodItem2({
   return (
     <div
       className={
-        "min-h-36 w-80 bg-Green1 rounded-xl border border-black shadow-md shadow-Green1 p-15 flex flex-1 flex-row gap-3.5"
+        "min-h-36 w-80 bg-white rounded-xl border-2 border-Green1 text-Green1 shadow-md shadow-Green1 p-2 flex flex-1 flex-row gap-1"
       }
     >
       <div
@@ -22,7 +22,7 @@ export default function foodItem2({
       >
         <div
           className={
-            "w-20 h-20 bg-white rounded-lg border border-black shadow-sm shadow-black"
+            "w-20 h-20 bg-white rounded-lg border border-Green1 shadow-sm shadow-black"
           }
         >
           <img

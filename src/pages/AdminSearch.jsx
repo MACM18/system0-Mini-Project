@@ -4,7 +4,7 @@ import Head from "next/head";
 import { useState } from "react";
 
 export default function AdminSearch(props) {
-  const [FoodItems, setFoodItems] = useState();
+  const [orders, setOrders] = useState(props.Orders);
   const [searchText, setSearchText] = useState("");
   // const selected = FoodItems.filter(
   //   (item) => (item.Meal.UserName = searchText)
@@ -38,40 +38,45 @@ export default function AdminSearch(props) {
         }
       >
         <TitleBox title={"Food Items"} />
-        <div className={"flex flex-auto flex-row gap-10 items-center"}>
+        <div
+          className={
+            "flex flex-auto flex-row gap-10 items-start justify-start"
+          }
+        >
           <TextBox
             title="Search"
             placeholder={"🔍"}
             handleChange={(event) => {
               setSearchText(event.target.value);
+
               if (searchText == "") {
-                setFoodItems(props.Orders);
+                setOrders(props.Orders);
               } else {
                 const temp = props.Orders.filter(
-                  (item) => (item.Meal.UserName = searchText)
+                  (item) => item.UserName == searchText
                 );
-                setFoodItems(temp);
+                console.log(temp);
+                setOrders(temp);
               }
             }}
           />
-          <Button text={"Search"} />
+          {/* <Button text={"Search"} /> */}
         </div>
         <div
           className={
             "bg-Green3 p-15 rounded-lg flex flex-wrap flex-row justify-left gap-30 overflow-y-scroll"
           }
         >
-          {FoodItems != undefined &&
-            FoodItems.map((item) => (
+          {orders != undefined &&
+            orders.map((item) => (
               <OrderDetails
                 key={item._id}
                 _id={item._id}
-                Name={item.Name}
-                Image={item.Image}
-                desc={item.Description}
-                Rating={item.Rating}
+                UserName={item.UserName}
                 Status={item.Status}
                 Price={item.Price}
+                Meal={item.Meal}
+                Items={item.Items}
               />
             ))}
         </div>

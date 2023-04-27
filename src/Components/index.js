@@ -6,3 +6,4 @@ export { default as Tags } from "./Tags";
 export { default as TextArea } from "./TextArea";
 export { default as TextBox } from "./TextBox";
 export { default as TitleBox } from "./TitleBox";
+export { default as CheckBox } from "./CheckBox";

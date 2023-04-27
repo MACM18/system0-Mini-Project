@@ -30,13 +30,13 @@ export default function ItemCounter(props) {
         "w-48 h-20 flex flex-1 flex-row justify-between gap-15 items-center"
       }
     >
-      <Button text={"-"} onClickFun={subFun} />
+      <Button text={"➖"} onClickFun={subFun} />
       <TextBox
         value={amount}
         type="Number"
         handleChange={textBoxChangeAmount}
       />
-      <Button text={"+"} onClickFun={addFun} />
+      <Button text={"➕"} onClickFun={addFun} />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Options } from "..";
 import { useRouter } from "next/router";
 import Image from "next/image";
-export default function OptionBox(List) {
+export default function OptionBox(props) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const router = useRouter();
   const addCorrect = (
@@ -15,13 +15,14 @@ export default function OptionBox(List) {
   );
   return (
     <div className={"flex flex-1 flex-col gap-10 rounded-lg p-10 bg-slate-300"}>
-      {List.List.map((listitem, index) => (
+      {props.List.map((listitem, index) => (
         <Options
           key={index}
           text={listitem.Text}
           ClickFunc={() => {
             setSelectedIndex(index);
-            router.push(listitem.Link);
+            listitem.Link != undefined && router.push(listitem.Link);
+            props.onClickFun != undefined && props.onClickFun();
           }}
           opt={index == selectedIndex ? addCorrect : null}
         />

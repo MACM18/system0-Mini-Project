@@ -21,12 +21,10 @@ export default function Menu(props) {
         "bg-Green2 w-full h-screen rounded-lg flex flex-1 flex-row gap-15"
       }
     >
-      <div className={"w-fit h-full"}>
-        <SideBarMenu />
-      </div>
+      <div className={"w-fit h-full"}>{/* <SideBarMenu /> */}</div>
       <div
         className={
-          "flex flex-1 flex-row flex-wrap place-items-center gap-x-15 bg-Green3 rounded-lg justify-around gap-y-15 w-full h-full "
+          "flex flex-1 p-5 flex-row flex-wrap place-items-start gap-x-15 bg-Green3 rounded-lg justify-around gap-y-15 w-full h-full "
         }
       >
         {props.FoodItems != undefined &&

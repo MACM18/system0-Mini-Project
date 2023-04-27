@@ -1,7 +1,9 @@
 import { ArrowButton, OptionBox } from "../CombinedComponents";
 import { TitleBox, Button } from "..";
 import { useState } from "react";
-export default function SideBarMenu() {
+import { useRouter } from "next/router";
+export default function SideBarMenu(props) {
+  const router = useRouter();
   const [menuStatus, setMenuStatus] = useState(false);
   return (
     <div className={"flex flex-1 flex-col gap-10 justify-between p-15"}>
@@ -28,33 +30,29 @@ export default function SideBarMenu() {
           <TitleBox title={"Time"} />
           <OptionBox
             List={[
-              { Text: "1", Link: "../" },
-              { Text: "2", Link: "../" },
-              { Text: "3", Link: "../" },
+              { Text: "Breakfast" },
+              { Text: "Lunch" },
+              { Text: "Dinner" },
             ]}
+            onClickFun={props.onClickFun}
           />
         </div>
       )}
-      {menuStatus && (
-        <div
-          className={
-            "flex flex-1 flex-col justifybetween gap-10 p-15 bg-Green2 rounded-lg shadow-inner shadow-black"
-          }
-        >
-          <TitleBox title={"Type"} />
-          <OptionBox
-            List={[
-              { Text: "1", Link: "../" },
-              { Text: "2", Link: "../" },
-              { Text: "3", Link: "../" },
-            ]}
-          />
-        </div>
-      )}
+
       {menuStatus && (
         <div className="flex flex-1 flex-row justify-between">
-          <Button text={"View Orders"} />
-          <Button text={"View Cart"} />
+          <Button
+            text={"View Orders"}
+            onClickFun={() => {
+              router.push("./OrderHistoryUser");
+            }}
+          />
+          <Button
+            text={"View Cart"}
+            onClickFun={() => {
+              router.push("./Cart");
+            }}
+          />
         </div>
       )}
     </div>

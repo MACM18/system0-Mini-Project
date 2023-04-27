@@ -2,8 +2,11 @@ import { Button, TextBox, TitleBox } from "@/Components";
 import { SideBarAdmin } from "@/Components/CombindedAdvanced";
 import AdminFooditemVarients from "@/Components/CombinedComponents/AdminFooditemVarients";
 import Head from "next/head";
+import { useState } from "react";
 
 export default function AdminFoodItems(props) {
+  const [foodItems, setFoodItems] = useState(props.FoodItems);
+  const [searchText, setSearchText] = useState("");
   const FoodItems = [
     { Name: "Name1", Image: 1, Desc: "aaaaaa", Rating: 2 },
     { Name: "Name2", Image: 2, Desc: "aaaaaab", Rating: 5 },
@@ -32,17 +35,33 @@ export default function AdminFoodItems(props) {
         }
       >
         <TitleBox title={"Food Items"} />
-        <div className={"flex flex-auto flex-row gap-10 items-center"}>
-          <TextBox title="Search" placeholder={"🔍"} />
-          <Button text={"Search"} />
+        <div className={"flex flex-auto flex-row gap-10 items-start"}>
+          <TextBox
+            title="Search"
+            placeholder={"🔍"}
+            handleChange={(event) => {
+              setSearchText(event.target.value);
+
+              if (searchText == "") {
+                setFoodItems(props.FoodItems);
+              } else {
+                const temp = props.FoodItems.filter(
+                  (item) => item.Name == searchText
+                );
+                // console.log(temp);
+                setFoodItems(temp);
+              }
+            }}
+          />
+          {/* <Button text={"Search"} /> */}
         </div>
         <div
           className={
             "bg-Green3 p-15 rounded-lg flex flex-wrap flex-row justify-left gap-30"
           }
         >
-          {props.FoodItems != undefined &&
-            props.FoodItems.map((item) => (
+          {foodItems != undefined &&
+            foodItems.map((item) => (
               <AdminFooditemVarients
                 key={item._id}
                 Name={item.Name}

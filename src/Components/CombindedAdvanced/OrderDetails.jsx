@@ -18,11 +18,14 @@ export default function OrderDetails(props) {
           "h-fit bg-white p-10 rounded-lg flex flex-auto flex-row gap-30 items-center"
         }
       >
-        <div className={"w-5/6"}>
-          <Label text={props._id} width="fit" />
+        <div className={"w-4/6"}>
+          <Label text={props.UserName} width="fit" />
         </div>
-        <div className={" w-1/6 flex flex-auto flex-row gap-15 items-center"}>
-          <DropDown Title={props.Status} List={[1, 2, 3, 4]} />
+        <div className={" w-2/6 flex flex-auto flex-row gap-15 items-center"}>
+          <DropDown
+            Title={props.Status}
+            List={["Abandoned", "Canceled", "Complete", "Pending"]}
+          />
           <Label text={props.Price} width="fit" />
         </div>
       </div>
@@ -31,8 +34,8 @@ export default function OrderDetails(props) {
           "h-fit bg-white p-10 rounded-lg flex flex-auto flex-row gap-15 items-center"
         }
       >
-        <Label text={props.Name} />
-        <TagList tags={props.Tags} />
+        <Label text={props.Meal} />
+        {/* <TagList tags={props.Items.Name} /> */}
         <Button
           text={arrow}
           onClickFun={() => {
@@ -50,14 +53,17 @@ export default function OrderDetails(props) {
             "h-full p-10 rounded-lg flex flex-auto flex-col gap-10 items-start overflow-y-scroll"
           }
         >
-          {props.order.map((item, index) => (
+          {props.Items.map((item) => (
             <div
+              key={item._id}
               className={
                 "bg-white w-full p-10 rounded-lg flex flex-auto flex-row gap-10 items-end"
               }
             >
-              <FoodItem Name={item.Name} imageNumber={item.Image} />
-              <TagList tags={item.tags} />
+              <Label text={item.Name} />
+              <Label text={item.Type} />
+              <Label text={item.Amount} />
+              <Label text={item.Price} />
             </div>
           ))}
         </div>

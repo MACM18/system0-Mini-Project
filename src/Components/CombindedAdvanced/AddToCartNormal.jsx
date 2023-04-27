@@ -7,44 +7,65 @@ import { useState } from "react";
 export default function AddToCartNormal(props) {
   const [total, setTotal] = useState(props.Price);
   const [amount, setAmount] = useState(1);
+  // const [price, setPrice] = useState(0);
+  // const [iteration, setIteration] = useState(0);
   const calcPrice = (amount) => {
     setTotal(amount * props.Price);
     setAmount(amount);
   };
   async function AddToCart() {
-    let data = {
-      UserName: localStorage.getItem("CurrentUser"),
-      Status: "Pending",
-      Items: [{ Name: props.FoodName, Amount: amount, Price: total }],
-    };
-    let config = {
-      method: "post",
-      maxBodyLength: Infinity,
-      url: "http://localhost:3000/api/Cart/?Method=Insert",
-      headers: {},
-      data: data,
-    };
-    const response = await axios(config);
-    localStorage.setItem("CartID", await response.data._id);
-    let data2 = {
-      id: localStorage.getItem("CartID"),
-      newItems: [{ Name: props.FoodName, Amount: amount, Price: total }],
-    };
-    let config2 = {
-      method: "post",
-      maxBodyLength: Infinity,
-      url: "http://localhost:3000/api/Cart/special",
-      headers: {},
-      data: data2,
-    };
-    const response2 = await axios(config2);
-    const Items = await response2.data;
-    console.log(Items);
+    if (localStorage.getItem("CurrentUser") != undefined) {
+      if (localStorage.getItem("CartID") == undefined) {
+        let data = {
+          UserName: localStorage.getItem("CurrentUser"),
+          Status: "Pending",
+          Items: [{ Name: props.FoodName, Amount: amount, Price: total }],
+          Price: total,
+        };
+
+        let config = {
+          method: "post",
+          maxBodyLength: Infinity,
+          url: "http://localhost:3000/api/Cart/?Method=Insert",
+          headers: {},
+          data: data,
+        };
+        const response = await axios(config);
+        localStorage.setItem("CartID", await response.data._id);
+        // setPrice(price + (await response.Price));
+        console.log(localStorage.getItem("CartID"));
+      } else {
+        let data2 = {
+          id: localStorage.getItem("CartID"),
+          newItems: { Name: props.FoodName, Amount: amount, Price: total },
+        };
+        console.log(localStorage.getItem("CartID"));
+        let config2 = {
+          method: "post",
+          maxBodyLength: Infinity,
+          url: "http://localhost:3000/api/Cart/special",
+          headers: {},
+          data: data2,
+        };
+        const response2 = await axios(config2);
+        const Items = await response2.data;
+        // console.log(Items);
+      }
+      //   let config3 = {
+      //     method: "put",
+      //     maxBodyLength: Infinity,
+      //     url: "http://localhost:3000/api/Cart/",
+      //     headers:{},
+      //     data:{Selection:"_id",
+      //   value:localStorage.getItem("CartID"),
+      // Fields:{Price:price}}
+      //   };
+    }
   }
   return (
     <div
       className={
-        "flex w-auto border border-black p-15 flex-1 flex-col gap-15 bg-Green3 rounded-lg relative shadow-xl shadow-black"
+        "flex w-auto border-2 border-Green1 p-2 flex-1 flex-col gap-15 bg-gradient-to-bl from-Green3 to-Green2 backdrop-blur-sm rounded-lg absolute shadow-xl shadow-black"
       }
     >
       <div
@@ -65,7 +86,7 @@ export default function AddToCartNormal(props) {
         <div className={"flex flex-1 flex-col gap-15 h-fit w-full"}>
           <TitleBox title={props.FoodName} />
           <TagList tags={props.Tags} />
-          <TextArea description={props.Description} />
+          <Label text={props.Description} />
         </div>
 
         <Image

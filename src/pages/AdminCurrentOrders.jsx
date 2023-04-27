@@ -6,40 +6,25 @@ import Head from "next/head";
 
 export default function AdminCurrentOrders(props) {
   // console.log(props.FoodItems);
-  const BreakfastData = props.FoodItems.filter((item) =>
-    item.Meal.includes("Breakfast")
-  );
-  const LunchData = props.FoodItems.filter((item) =>
-    item.Meal.includes("Lunch")
-  );
-  const DinnerData = props.FoodItems.filter((item) =>
-    item.Meal.includes("Dinner")
-  );
-  const CompleteData = props.FoodItems.filter(
+
+  const CompleteData = props.Orders.filter(
     (item) => item.Status === "Complete"
   );
-  const RemainingData = props.FoodItems.filter(
-    (item) => item.Status === "In Progress"
+  const RemainingData = props.Orders.filter(
+    (item) => item.Status === "Pending"
   );
+  const BreakfastData = RemainingData.filter(
+    (item) => item.Meal == "Breakfast"
+  );
+  const LunchData = RemainingData.filter((item) => item.Meal == "Lunch");
+  const DinnerData = RemainingData.filter((item) => item.Meal == "Dinner");
   const CompleteDataCount = CompleteData.length;
   const RemainingDataCount = RemainingData.length;
-  const TotalCount = props.FoodItems.length;
+  const TotalCount = props.Orders.length;
   // console.log(props.FoodItems.length);
-  const BreakfastVegCount = BreakfastData.filter((item) => item.Type == "Veg");
-  const BreakfastChickenCount = BreakfastData.filter(
-    (item) => item.Type == "Chicken"
-  );
-  const BreakfastFishCount = BreakfastData.filter(
-    (item) => item.Type == "Fish"
-  );
-  const LunchVegCount = LunchData.filter((item) => item.Type == "Veg");
-  const LunchChickenCount = LunchData.filter((item) => item.Type == "Chicken");
-  const LunchFishCount = LunchData.filter((item) => item.Type == "Fish");
-  const DinnerVegCount = DinnerData.filter((item) => item.Type == "Veg");
-  const DinnerChickenCount = DinnerData.filter(
-    (item) => item.Type == "Chicken"
-  );
-  const DinnerFishCount = DinnerData.filter((item) => item.Type == "Fish");
+  const BreakfastCount = BreakfastData.length;
+  const LunchCount = LunchData.length;
+  const DinnerCount = DinnerData.length;
   // const FoodItems = [
   //   { Name: "Name1", Image: 1, Desc: "aaaaaa", Rating: 2 },
   //   { Name: "Name2", Image: 2, Desc: "aaaaaab", Rating: 5 },
@@ -54,21 +39,21 @@ export default function AdminCurrentOrders(props) {
   //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
   //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
   // ];
-  const BreakfastCounter = [
-    { Name: "Veg", Count: BreakfastVegCount.length },
-    { Name: "Fish", Count: BreakfastFishCount.length },
-    { Name: "Chicken", Count: BreakfastChickenCount.length },
-  ];
-  const LunchCounter = [
-    { Name: "Veg", Count: LunchVegCount.length },
-    { Name: "Fish", Count: LunchFishCount.length },
-    { Name: "Chicken", Count: LunchChickenCount.length },
-  ];
-  const SnackAndRestCounter = [
-    { Name: "Veg", Count: DinnerVegCount.length },
-    { Name: "Fish", Count: DinnerFishCount.length },
-    { Name: "Chicken", Count: DinnerChickenCount.length },
-  ];
+  // const BreakfastCounter = [
+  //   { Name: "Veg", Count: BreakfastVegCount.length },
+  //   { Name: "Fish", Count: BreakfastFishCount.length },
+  //   { Name: "Chicken", Count: BreakfastChickenCount.length },
+  // ];
+  // const LunchCounter = [
+  //   { Name: "Veg", Count: LunchVegCount.length },
+  //   { Name: "Fish", Count: LunchFishCount.length },
+  //   { Name: "Chicken", Count: LunchChickenCount.length },
+  // ];
+  // const SnackAndRestCounter = [
+  //   { Name: "Veg", Count: DinnerVegCount.length },
+  //   { Name: "Fish", Count: DinnerFishCount.length },
+  //   { Name: "Chicken", Count: DinnerChickenCount.length },
+  // ];
   return (
     <div className={" h-screen bg-Green2 flex flex-auto flex-row gap-15"}>
       <Head>
@@ -88,37 +73,26 @@ export default function AdminCurrentOrders(props) {
           <Counter text={"Remaining"} amount={RemainingDataCount} />
           <Counter text={"Completed"} amount={CompleteDataCount} />
         </div>
-        <TitleBox title={"Breakfast"} />
         <div className={"flex p-10 flex-row justify-between overflow-x-auto"}>
-          {BreakfastCounter != undefined &&
-            BreakfastCounter.map((item, index) => (
-              <Counter key={index} text={item.Name} amount={item.Count} />
-            ))}
+          <Counter text={"Breakfast"} amount={BreakfastCount} />
         </div>
-        <TitleBox title={"Current Orders"} />
+
         <div className={"flex p-10 flex-row justify-between overflow-x-auto"}>
-          {LunchCounter != undefined &&
-            LunchCounter.map((item, index) => (
-              <Counter key={index} text={item.Name} amount={item.Count} />
-            ))}
+          <Counter text={"Lunch"} amount={LunchCount} />
         </div>
-        <TitleBox title={"Current Orders"} />
+
         <div className={"flex p-10 flex-row justify-between overflow-x-auto"}>
-          {SnackAndRestCounter != undefined &&
-            SnackAndRestCounter.map((item, index) => (
-              <Counter key={index} text={item.Name} amount={item.Count} />
-            ))}
+          <Counter text={"Dinner"} amount={DinnerCount} />
         </div>
       </div>
     </div>
   );
 }
 const axios = require("axios");
-const dateObj = new Date();
-const year = dateObj.getFullYear();
-const month = dateObj.getMonth();
-const date = dateObj.getDate();
-const currentDate = new Date(year, month, date);
+const moment = require("moment");
+const now = moment();
+
+const currentDate = now.format("YYYY-MM-DD");
 let config = {
   method: "post",
   maxBodyLength: Infinity,
@@ -129,10 +103,10 @@ let config = {
 export const getStaticProps = async () => {
   try {
     const response = await axios(config);
-    const FoodItems = await response.data;
-    return { props: { FoodItems } };
+    const Orders = await response.data;
+    return { props: { Orders } };
   } catch (err) {
     console.error(err.message);
-    return { props: { FoodItems: [] } };
+    return { props: { Orders: [] } };
   }
 };

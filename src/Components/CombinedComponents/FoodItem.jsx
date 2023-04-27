@@ -3,7 +3,7 @@ export default function foodItem({ Name, imageNumber, ClickFun }) {
     <div
       onClick={ClickFun}
       className={
-        "min-w-28 min-h-36 max-w-fit bg-Green1 rounded-xl border border-black shadow-md shadow-Green1 p-15 flex  flex-1 flex-col gap-3.5"
+        "w-28 min-h-36 bg-Green1 rounded-xl border border-black shadow-md shadow-Green1 p-2 flex  flex-1 flex-col items-center gap-1"
       }
     >
       <div
@@ -17,8 +17,8 @@ export default function foodItem({ Name, imageNumber, ClickFun }) {
           alt={imageNumber}
         ></img>
       </div>
-      <div className={"w-auto h-auto "}>
-        <p className={"font-medium text-center text-lg"}>{Name}</p>
+      <div className={"w-full h-auto "}>
+        <p className={"font-medium text-center text-md"}>{Name}</p>
       </div>
     </div>
   );

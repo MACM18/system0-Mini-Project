@@ -39,7 +39,10 @@ export default function foodItem({ Name, imageNumber }) {
         <p className={"font-medium text-center text-lg"}>{Name}</p>
       </div>
       {visibility && (
-        <RemoveConfirmation BackFunc={() => setVisibility(false)} />
+        <RemoveConfirmation
+          BackFunc={() => setVisibility(false)}
+          RemoveFunc={props.RemoveFunc}
+        />
       )}
     </div>
   );

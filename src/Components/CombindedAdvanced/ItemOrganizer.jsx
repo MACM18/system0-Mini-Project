@@ -9,10 +9,57 @@ import TitleBox from "../TitleBox";
 import TextBox from "../TextBox";
 import Button from "../Button";
 import Image from "next/image";
-
+const axios = require("axios");
 export default function ItemOrganizer(props) {
+  const [items, setItems] = useState(props.Items);
   const [visibility, setVisibility] = useState(false);
   const [showItemList, setShowItemList] = useState(false);
+  async function AvailableFunc(item) {
+    setItems(props.Items.push({ Name: item.Name, Image: item.Image }));
+    setShowItemList(false);
+    let data = {
+      Selection: "_id",
+      value: item._id,
+      Fields: { Availability: true },
+    };
+    let config = {
+      method: "put",
+      maxBodyLength: Infinity,
+      url: "http://localhost:3000/api/FoodItem/",
+      headers: {},
+      data: data,
+    };
+    try {
+      const response = await axios(config);
+      const Submit = await response.data;
+      console.log(Submit);
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+
+  async function UnAvalilableFunc(item) {
+    setItems(props.Items.pop({ Name: item.Name, Image: item.Image }));
+    let data = {
+      Selection: "_id",
+      value: item._id,
+      Fields: { Availability: false },
+    };
+    let config = {
+      method: "put",
+      maxBodyLength: Infinity,
+      url: "http://localhost:3000/api/FoodItem/",
+      headers: {},
+      data: data,
+    };
+    try {
+      const response = await axios(config);
+      const Submit = await response.data;
+      console.log(Submit);
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
   return (
     <div className={"flex flex-auto flex-col gap-15 p-15"}>
       <div
@@ -35,7 +82,11 @@ export default function ItemOrganizer(props) {
       {visibility && (
         <div className="flex flex-row gap-10 flex-wrap">
           {props.Items.map((Item, index) => (
-            <FoodItemWithClose Name={Item.Name} imageNumber={Item.Image} />
+            <FoodItemWithClose
+              Name={Item.Name}
+              imageNumber={Item.Image}
+              RemoveFunc={UnAvalilableFunc(Item)}
+            />
           ))}
           <FoodItem5
             onClickFunc={() => {
@@ -65,8 +116,24 @@ export default function ItemOrganizer(props) {
             />
           </div>
           <div className={"flex flex-row gap-10 items-center"}>
-            <TextBox title="Search" placeholder={"🔍"} />
-            <Button text={"Search"} />
+            <TextBox
+              title="Search"
+              placeholder={"🔍"}
+              handleChange={(event) => {
+                setSearchText(event.target.value);
+
+                if (searchText == "") {
+                  setItems(props.Items);
+                } else {
+                  const temp = props.Items.filter(
+                    (item) => item.Name == searchText
+                  );
+                  console.log(temp);
+                  setItems(temp);
+                }
+              }}
+            />
+            {/* <Button text={"Search"} /> */}
           </div>
           <div
             className={
@@ -78,11 +145,7 @@ export default function ItemOrganizer(props) {
                 key={index}
                 Name={item.Name}
                 imageNumber={item.Image}
-                ClickFun={() => {
-                  props.Items.push({ Name: item.Name, Image: item.Image });
-
-                  setShowItemList(false);
-                }}
+                ClickFun={AvailableFunc(item)}
               />
             ))}
           </div>

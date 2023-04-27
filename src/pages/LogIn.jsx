@@ -33,10 +33,23 @@ export default function LogIn() {
       headers: {},
       data: data,
     };
-
+    let data2 = {
+      UserName: userName,
+    };
+    console.log(data);
+    let config2 = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: "http://localhost:3000/api/User/?Method=Find",
+      headers: {},
+      data: data2,
+    };
     const response = await axios(config);
     const details = await response.data;
-    console.log(details);
+    // console.log(details);
+    const response2 = await axios(config2);
+    const details2 = await response2.data;
+    console.log(details2);
     if (
       (details[0] != undefined &&
         details[0] != undefined &&
@@ -48,7 +61,11 @@ export default function LogIn() {
       setTimeout(() => {
         setAlertSuccess(false);
       }, 1000);
-      router.push("./Menu/");
+      if (!details2[0] != undefined && details2[0].Type == "Special") {
+        router.push("./AdminDashboard");
+      } else {
+        router.push("./Menu/");
+      }
     } else {
       setAlertInvalid(true);
       setTimeout(() => {

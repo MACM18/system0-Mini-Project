@@ -19,12 +19,13 @@ const handler = async (req, res) => {
   } else if (req.method === "POST" && req.query.Method === "Insert") {
     try {
       await connectDb();
-      const { UserName, Status, Items, Total } = req.body;
+      const { UserName, Status, Items, Total, Meal } = req.body;
       const newCart = new Cart({
         UserName,
         Status,
         Items,
         Total,
+        Meal,
       });
       const carts = await newCart.save();
       res.status(200).json(carts);

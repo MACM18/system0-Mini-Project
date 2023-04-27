@@ -5,12 +5,35 @@ import Head from "next/head";
 import { useState } from "react";
 
 export default function AdminPayments(props) {
-  const [total, setTotal] = useState(0);
   const CompletedOrders = props.Orders.filter(
     (item) => item.Status == "Complete"
   );
+  let CompletedPrice = 0;
   CompletedOrders.forEach((element) => {
-    setTotal(total + element.Price);
+    CompletedPrice += element.Price;
+  });
+  const RemainingOrders = props.Orders.filter(
+    (item) => item.Status == "Pending"
+  );
+  let RemainingPrice = 0;
+  RemainingOrders.forEach((element) => {
+    RemainingPrice += element.Price;
+  });
+  const Breakfast = CompletedOrders.filter((item) => item.Meal == "Breakfast");
+  const Lunch = CompletedOrders.filter((item) => item.Meal == "Lunch");
+  const Dinner = CompletedOrders.filter((item) => item.Meal == "Dinner");
+  let BreakfastPrice = 0;
+
+  Breakfast.forEach((element) => {
+    BreakfastPrice += element.Price;
+  });
+  let LunchPrice = 0;
+  Lunch.forEach((element) => {
+    LunchPrice += element.Price;
+  });
+  let DinnerPrice = 0;
+  Dinner.forEach((element) => {
+    DinnerPrice += element.Price;
   });
   const FoodItems = [
     { Name: "Name1", Image: 1, Desc: "aaaaaa", Rating: 2 },
@@ -60,33 +83,36 @@ export default function AdminPayments(props) {
         <TitleBox title={"CurrentOrders"} />
         <div className={"flex p-15 flex-row justify-between"}>
           <Counter text={"ConfirmedOrders"} amount={CompletedOrders.length} />
-          <Counter text={"ExpectedIncome"} amount={total} />
+          <Counter text={"Income"} amount={CompletedPrice} />
         </div>
-        {/* <TitleBox title={"Breakfast"} />
         <div className={"flex p-15 flex-row justify-between"}>
-          <Counter text={"Orders"} amount={props.BreakfastOrders} />
-          <Counter text={"Income"} amount={props.BreakfastIncome} />
+          <Counter text={"RemainingOrders"} amount={RemainingOrders.length} />
+          <Counter text={"ExpectedIncome"} amount={RemainingPrice} />
+        </div>
+        <TitleBox title={"Breakfast"} />
+        <div className={"flex p-15 flex-row justify-between"}>
+          <Counter text={"Orders"} amount={Breakfast.length} />
+          <Counter text={"Income"} amount={BreakfastPrice} />
         </div>
         <TitleBox title={"Lunch"} />
         <div className={"flex p-15 flex-row justify-between"}>
-          <Counter text={"Orders"} amount={props.LunchOrders} />
-          <Counter text={"Income"} amount={props.LunchIncome} />
+          <Counter text={"Orders"} amount={Lunch.length} />
+          <Counter text={"Income"} amount={LunchPrice} />
         </div>
         <TitleBox title={"Dinner"} />
         <div className={"flex p-15 flex-row justify-between"}>
-          <Counter text={"Orders"} amount={props.SnackOrders} />
-          <Counter text={"Income"} amount={props.SnackIncome} />
-        </div> */}
+          <Counter text={"Orders"} amount={Dinner.length} />
+          <Counter text={"Income"} amount={DinnerPrice} />
+        </div>
       </div>
     </div>
   );
 }
 const axios = require("axios");
-const dateObj = new Date();
-const year = dateObj.getFullYear();
-const month = dateObj.getMonth();
-const date = dateObj.getDate();
-const currentDate = new Date(year, month, date);
+const moment = require("moment");
+const now = moment();
+const currentDate = now.format("YYYY-MM-DD");
+const currentTime = now;
 let config = {
   method: "post",
   maxBodyLength: Infinity,
@@ -97,7 +123,7 @@ let config = {
 export const getStaticProps = async () => {
   try {
     const response = await axios(config);
-    const FoodItems = await response.data;
+    const Orders = await response.data;
     return { props: { Orders } };
   } catch (err) {
     console.error(err.message);

@@ -15,7 +15,7 @@ export default function OrderSummary(props) {
       >
         <Label text={"Total Orders"} width="fit" />
         <div className={"flex flex-row gap-15 w-fit"}>
-          <Label text={props.TotalAmount} width="fit" />
+          <Label text={props.Total} width="fit" />
           <Button
             text={arrow}
             onClickFun={() => {
@@ -36,7 +36,7 @@ export default function OrderSummary(props) {
           </div>
           <div className={"p-5 flex flex-row justify-between"}>
             <Label text={"Completed"} width="fit" />
-            <Label text={props.Completed} width="fit" />
+            <Label text={props.Complete} width="fit" />
           </div>
           <div className={"p-5 flex flex-row justify-between"}>
             <Label text={"Remaining"} width="fit" />

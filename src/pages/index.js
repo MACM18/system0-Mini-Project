@@ -1,68 +1,14 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
-import {
-  AlertItemAdded,
-  AlertOrderPlaced,
-  ContactMenu,
-  NavBox,
-  OrderConfirmation,
-} from "@/Components/CombinedComponents";
-import { TitleBox, Label, TextBox, Button } from "@/Components";
-import { useState } from "react";
+import Image from "next/image";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import {
-  OrderConfirmationPage,
-  OrderDetails,
-  OrderSummary,
-  Cart,
-} from "@/Components/CombindedAdvanced";
-import ItemOrganizer from "@/Components/CombindedAdvanced/ItemOrganizer";
-import { render } from "react-dom";
-// import Cart from "@/Components/CombindedAdvanced";
+import Menu from "./Menu";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const [userName, setUserName] = useState("userName");
-  const [password, setPassword] = useState("Password");
-  const [visibility, setVisibility] = useState(false);
-  const [state, setState] = useState(false);
-  const UserNameFunc = (event) => {
-    setUserName(event.target.value);
-  };
-  const PasswordFunc = (event) => {
-    setPassword(event.target.value);
-  };
   const router = useRouter();
-  const CheckLogin = () => {
-    userName == "MACM" && password == "12345678"
-      ? setState(true)
-      : setState(false);
-    state && router.push("/Menu");
-  };
-  const carts = {
-    UserName: "User1",
-    Status: "Pending",
-    Items: [
-      {
-        Name: "Rice & Curry",
-        Amount: 5,
-        Price: 750,
-      },
-      {
-        Name: "Rice & Curry",
-        Amount: 5,
-        Price: 750,
-      },
-      {
-        Name: "Rice & Curry",
-        Amount: 5,
-        Price: 750,
-      },
-    ],
-    _id: "6447d4dad326701acbc0b019",
-    __v: 0,
-  };
-  console.log(localStorage.getItem("CartID"));
   return (
     <>
       <Head>
@@ -73,28 +19,62 @@ export default function Home() {
         />
         <meta charSet="UTF-8" />
       </Head>
-      <div
-        onClick={() => {
-          setVisibility(true);
-          setTimeout(() => {
-            setVisibility(false);
-          }, 2500);
-        }}
-      >
-        aaaaa
-        {visibility && <AlertItemAdded Name="aaa" />}
+      <div className="max-w-screen h-auto min-h-screen bg-gradient-to-b from-purple-300 via-purple-500 to-blue-700  flex flex-1 flex-col justify-center gap-5">
+        <header className="flex flex-1 max-w-fill max-h-fit m-2 p-2 rounded-md grow-0 flex-row justify-between opacity-80 items-start bg-blue-50 text-blue-700">
+          <div className="flex flex-col items-center gap-5 bg-blue-400 p-2 rounded-md text-white font-extrabold text-xl">
+            <div className="p-2 bg-slate-300 rounded-md">
+              <Image
+                src="/Resources/MAIN.jpeg"
+                width="100"
+                height="100"
+                className="rounded-md "
+              ></Image>
+            </div>
+            <div>Food Order</div>
+          </div>
+          <navigator>
+            <div
+              onClick={() => router.push("./")}
+              className="flex p-2 flex-1 flex-row gap-10 bg-slate-300 rounded-md"
+            >
+              <div className="p-2 px-6 cursor-pointer rounded-lg shadow-md shadow-purple-400 border-2 border-purple-500 hover:bg-blue-700 hover:text-white hover:shadow-none bg-blue-300 text-lg font-semibold text-blue-900">
+                Home
+              </div>
+              <div className="p-2 px-6 cursor-pointer rounded-lg shadow-md shadow-purple-400 border-2 border-purple-500 hover:bg-blue-700 hover:text-white hover:shadow-none bg-blue-300 text-lg font-semibold text-blue-900">
+                Contact
+              </div>
+              <div className="p-2 px-6 cursor-pointer rounded-lg shadow-md shadow-purple-400 border-2 border-purple-500 hover:bg-blue-700 hover:text-white hover:shadow-none bg-blue-300 text-lg font-semibold text-blue-900">
+                More
+              </div>
+              <div
+                onClick={() => router.push("./LogIn")}
+                className="p-2 px-6 cursor-pointer rounded-lg shadow-md shadow-purple-400 border-2 border-purple-500 hover:bg-purple-700 hover:text-white hover:border-blue-500 hover:shadow-none bg-blue-300 text-lg font-semibold text-blue-900"
+              >
+                Log In
+              </div>
+            </div>
+          </navigator>
+        </header>
+        <div className="max-w-full h-fit bg-blue-100 opacity-70 m-1 p-2 rounded-md flex grow flex-col justify-betwen items-start">
+          <div className="w-full h-fit  p-4 flex flex-1 flex-col items-center justify-center gap-10">
+            <div className="w-1/2 text-center bg-blue-200 p-4 rounded-md border-2 border-purple-700">
+              Food ordering system for the Canteen
+            </div>
+            <div className="w-1/2 text-center bg-blue-200 p-4 rounded-md border-2 border-purple-700">
+              A web application which is still being developed and has some core
+              functionalities. This system will allow anyone to self register
+              with their details and make their orders online
+            </div>
+          </div>
+          <div
+            onClick={() => router.push("./Menu")}
+            className="self-end p-4 border border-blue-500 cursor-pointer rounded-md hover:rounded-sm"
+          >
+            👇 View Menu
+          </div>
+        </div>
+        <div>{/* <Menu /> */}</div>
       </div>
-      <OrderSummary
-        TotalAmount={100}
-        Canceled={10}
-        Completed={50}
-        Remaining={20}
-        Abandoned={15}
-      />
-      <Cart
-        Carts={carts}
-        ID={typeof window !== "undefined" && localStorage.getItem("CartID")}
-      />
     </>
   );
 }

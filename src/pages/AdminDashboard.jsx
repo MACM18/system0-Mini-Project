@@ -4,7 +4,15 @@ import { Counter, DropDown, FoodItem } from "@/Components/CombinedComponents";
 import Head from "next/head";
 
 export default function AdminDashboard(props) {
-  const selected = props.Orders.filter((item) => item.status != "Complete");
+  const selected = props.Orders.filter((item) => item.Status != "Complete");
+  const canceled = props.Orders.filter((item) => item.Status == "Canceled");
+  const complete = props.Orders.filter((item) => item.Status == "Complete");
+  const abandoned = props.Orders.filter((item) => item.Status == "Abandoned");
+  const TotalCount = props.Orders.length;
+  const RemainingCount = selected.length;
+  const CanceledCount = canceled.length;
+  const CompeteCount = complete.length;
+  const AbandonedCount = abandoned.length;
   return (
     <div className={" h-screen bg-Green2 flex flex-auto flex-row gap-15"}>
       <Head>
@@ -47,43 +55,57 @@ export default function AdminDashboard(props) {
             />
           </div>
         </div>*/}
-        <OrderSummary />
+        <OrderSummary
+          Total={TotalCount}
+          Remaining={RemainingCount}
+          Canceled={CanceledCount}
+          Complete={CompeteCount}
+          Abandoned={AbandonedCount}
+        />
         <TitleBox title={"Orders"} />
         <div className="w-full h-auto">
-          <table className="w-full">
-            <tr>
-              <th>Name</th>
-              <th>Food</th>
-              <th>Price</th>
-              <th>Complete</th>
-              <th>Cancel</th>
-            </tr>
+          <div className="w-full">
+            <div>
+              <div>Name</div>
+              <div>Food</div>
+              <div>Price</div>
+              <div>Complete</div>
+              <div>Cancel</div>
+            </div>
             {selected.map((items) => (
-              <tr>
-                <td>items.UserName</td>
-                <td>items.Items</td>
-                <td>items.Price</td>
-                <td>
-                  <Button text={Complete} />
-                </td>
-                <td>
-                  <Button text={Cancel} />
-                </td>
-              </tr>
+              <div>
+                <div>{items.UserName}</div>
+                <div>
+                  {items.Items.map((values) => (
+                    <>
+                      <div>{values.Name}</div>
+                      <div>{values.Type}</div>
+                      <div>{values.Amount}</div>
+                      <div>{values.Price}</div>
+                    </>
+                  ))}
+                </div>
+                <div>{items.Price}</div>
+                <div>
+                  <Button text={"Complete"} />
+                </div>
+                <div>
+                  <Button text={"Cancel"} />
+                </div>
+              </div>
             ))}
-            ;
-          </table>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 const axios = require("axios");
-const dateObj = new Date();
-const year = dateObj.getFullYear();
-const month = dateObj.getMonth();
-const date = dateObj.getDate();
-const currentDate = new Date(year, month, date);
+const moment = require("moment");
+const now = moment();
+
+const currentDate = now.format("YYYY-MM-DD");
+
 let config = {
   method: "post",
   maxBodyLength: Infinity,
