@@ -1,6 +1,6 @@
 import axios from "axios";
 import { TitleBox, TextArea, Label, Button } from "..";
-import { ItemCounter, TagList } from "../CombinedComponents";
+import { Alert, ItemCounter, TagList } from "../CombinedComponents";
 import Image from "next/image";
 import { useState } from "react";
 // import Cart from "@/Database/models/Cart";
@@ -68,6 +68,7 @@ export default function AddToCartNormal(props) {
         "flex w-auto border-2 border-Green1 p-2 flex-1 flex-col gap-15 bg-gradient-to-bl from-Green3 to-Green2 backdrop-blur-sm rounded-lg absolute shadow-xl shadow-black"
       }
     >
+      <Alert Text={"Added to the Cart"}></Alert>
       <div
         onClick={props.CloseButtonFunc}
         className={
