@@ -27,7 +27,7 @@ export default function SideBarMenu(props) {
             "flex flex-1 flex-col justifybetween gap-10 p-15 bg-Green2 rounded-lg shadow-inner shadow-black"
           }
         >
-          <TitleBox title={"Time"} />
+          {/* <TitleBox title={"Time"} />
           <OptionBox
             List={[
               { Text: "Breakfast" },
@@ -35,12 +35,7 @@ export default function SideBarMenu(props) {
               { Text: "Dinner" },
             ]}
             onClickFun={props.onClickFun}
-          />
-        </div>
-      )}
-
-      {menuStatus && (
-        <div className="flex flex-1 flex-row justify-between">
+          /> */}
           <Button
             text={"View Orders"}
             onClickFun={() => {
@@ -53,6 +48,12 @@ export default function SideBarMenu(props) {
               router.push("./Cart");
             }}
           />
+        </div>
+      )}
+
+      {menuStatus && (
+        <div className="flex flex-1 flex-row justify-between gap-2">
+          <Button text={"Back"} onClickFun={() => router.push("./LogIn")} />
         </div>
       )}
     </div>

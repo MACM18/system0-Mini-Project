@@ -26,7 +26,7 @@ export default function foodItem2({
           }
         >
           <img
-            src="../src/+{imageNumber}"
+            src={"/Resources/Food/" + imageNumber}
             className={"w-full h-full"}
             alt={imageNumber}
           ></img>

@@ -28,7 +28,7 @@ export default function SideBarMenu() {
           }
         >
           <OptionBox
-            List={[{ Text: "Dash Board", Link: "../AdminDashboard" }]}
+            List={[{ Text: "DashBoard", Link: "../AdminDashboard" }]}
           />
         </div>
       )}
@@ -42,7 +42,7 @@ export default function SideBarMenu() {
           <OptionBox
             List={[
               { Text: "Food menu", Link: "../AdminFoodItems" },
-              { Text: "Acailability", Link: "../AdminFoodAvailability" },
+              // { Text: "Acailability", Link: "../AdminFoodAvailability" },
             ]}
           />
         </div>
@@ -56,8 +56,8 @@ export default function SideBarMenu() {
           <TitleBox title={"Orders"} />
           <OptionBox
             List={[
-              { Text: "Orders - Available", Link: "../AdminCurrentOrders" },
-              { Text: "Search", Link: "../AdminSearch" },
+              // { Text: "Orders - Available", Link: "../AdminCurrentOrders" },
+              { Text: "Orders", Link: "../AdminSearch" },
               { Text: "Payments", Link: "../AdminPayments" },
             ]}
           />

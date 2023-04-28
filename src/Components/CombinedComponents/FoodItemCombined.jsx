@@ -3,7 +3,7 @@ import { useState } from "react";
 import { AddToCartNormal, AddToCartWithCurry } from "../CombindedAdvanced";
 export default function FoodItemCombined({
   Name,
-  Image,
+  imageNumber,
   desc,
   Rating,
   Curry = [
@@ -23,7 +23,7 @@ export default function FoodItemCombined({
       {varient == 0 && (
         <FoodItem
           Name={Name}
-          imageNumber={Image}
+          imageNumber={imageNumber}
           ClickFun={() => {
             setVarient(1);
           }}
@@ -32,7 +32,7 @@ export default function FoodItemCombined({
       {varient == 1 && (
         <FoodItem2
           Name={Name}
-          imageNumber={Image}
+          imageNumber={imageNumber}
           description={desc}
           rating={Rating}
           ClickFun={() => setVarient(0)}
@@ -46,7 +46,7 @@ export default function FoodItemCombined({
           FoodName={Name}
           Description={desc}
           Tags={Tags}
-          ImageName={Image}
+          ImageName={imageNumber}
           Price={Price}
           CloseButtonFunc={() => setVarient(1)}
         />
@@ -56,7 +56,7 @@ export default function FoodItemCombined({
           FoodName={Name}
           Description={desc}
           Tags={Tags}
-          ImageName={Image}
+          ImageName={imageNumber}
           // Curry={Curry}
           Price={Price}
           CloseButtonFunc={() => setVarient(1)}

@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { TextArea, Button, TextBox, TitleBox, Tags, Label } from "..";
 import { Alert, TagList } from "@/Components/CombinedComponents";
-import { useRouter } from "next/router";
 const axios = require("axios");
-export default function FoodItem4(props) {
-  const [name, setName] = useState(props.Name);
-  const [image, setImage] = useState(props.imageNumber);
-  const [desc, setDesc] = useState(props.description);
-  const [price, setPrice] = useState(props.price);
+export default function FoodItem6(props) {
+  const [name, setName] = useState();
+  const [image, setImage] = useState();
+  const [desc, setDesc] = useState();
+  const [price, setPrice] = useState();
   const [BF, setBF] = useState(false);
   const [LH, setLH] = useState(false);
   const [DR, setDR] = useState(false);
@@ -22,34 +21,8 @@ export default function FoodItem4(props) {
   let Meals = [];
   let Types = [];
   let Tagss = [];
-  const router = useRouter();
-  async function RemoveFunc() {
-    let data = {
-      _id: props.ID,
-    };
-    let config = {
-      method: "delete",
-      maxBodyLength: Infinity,
-      url: "http://localhost:3000/api/FoodItem/",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
-    try {
-      const response = await axios(config);
-      const output = await response.data;
-      console.log(output);
-      setDeleteVisibility(true);
-      setTimeout(() => {
-        setDeleteVisibility(false);
-      }, 2000);
-      router.push("/AdminFoodItems");
-    } catch (err) {
-      console.error(err.message);
-    }
-  }
-  async function UpdateFunc() {
+
+  async function InsertFunc() {
     if (BF == true) {
       Meals.push("Breakfast");
       Tagss.push("Breakfast");
@@ -83,23 +56,20 @@ export default function FoodItem4(props) {
       Tagss.push("Fried Fish");
     }
     let data = {
-      Selection: "_id",
-      value: props.ID,
-      Fields: {
-        Name: name,
-        Type: Types,
-        Meal: Meals,
-        Price: price,
-        Image: image,
-        Description: desc,
-        Tags: Tagss,
-      },
+      Name: name,
+      Type: Types,
+      Meal: Meals,
+      Price: price,
+      Rating: Math.floor(Math.random() * 5),
+      Image: image,
+      Description: desc,
+      Tags: Tagss,
     };
 
     let config = {
-      method: "put",
+      method: "post",
       maxBodyLength: Infinity,
-      url: "http://localhost:3000/api/FoodItem/",
+      url: "http://localhost:3000/api/FoodItem/?Method=Insert",
       headers: {},
       data: data,
     };
@@ -127,22 +97,7 @@ export default function FoodItem4(props) {
         "bg-white p-15 shadow-lg shadow-black rounded-lg flex flex-1 flex-col  gap-30 w-full h-screen"
       }
     >
-      {updateVisibility && <Alert Text="Data Updated" />}
-      {deleteVisibility && <Alert Text="Deleted" />}
-      {deleteDecison && (
-        <div className="w-1/2 h-fit absolute top-1/2 flex flex-1 flex-col gap-2 p-4 rounded-lg bg-gradient-to-r from-Green3 to-Green2 ">
-          <TitleBox title="Are you Sure?" />
-          <div className="flex flex-1 w-full flex-row justify-around">
-            <Button
-              text={"No"}
-              onClickFun={() => {
-                setDeleteDEcison(false);
-              }}
-            />
-            <Button text={"Yes"} onClickFun={RemoveFunc} />
-          </div>
-        </div>
-      )}
+      {updateVisibility && <Alert Text="Item Added!" />}
       <div className={"w-full h-fit flex flex-1 flex-row gap-15"}>
         <div
           className={
@@ -152,38 +107,34 @@ export default function FoodItem4(props) {
           <img
             src={"/Resources/Food/" + image}
             className={"w-full h-full"}
-            alt={props.image}
+            alt={"image"}
           ></img>
         </div>
-        <TitleBox title={props.Name} />
+        <TitleBox title={"Add New Item"} />
         <Button text={"Cancel"} onClickFun={props.CancelFunc} />
       </div>
       <div className={"w-full h-full flex flex-1 flex-col gap-15"}>
         <TextBox
-          title={"New Name"}
-          value={name}
-          handleChange={(event) => {
-            setName(event.target.value);
+          title={"Name"}
+          handleChange={(e) => {
+            setName(e.target.value);
           }}
         />
         <TextBox
           title={"Image name"}
-          value={image}
-          handleChange={(event) => {
-            setImage(event.target.value);
+          handleChange={(e) => {
+            setImage(e.target.value);
           }}
         />
         <TextArea
-          description={desc}
-          handleChange={(event) => {
-            setDesc(event.target.value);
+          handleChange={(e) => {
+            setDesc(e.target.value);
           }}
         />
         <TextBox
           title={"Price"}
-          value={price}
-          handleChange={(event) => {
-            setPrice(event.target.value);
+          handleChange={(e) => {
+            setPrice(e.target.value);
           }}
         />
       </div>
@@ -277,9 +228,8 @@ export default function FoodItem4(props) {
         />
         <label htmlFor="Fried Fish">Fried Fish</label>
       </div>
-      <div className={"w-full h-fit flex flex-1 flex-row justify-between"}>
-        <Button text={"Remove"} onClickFun={() => setDeleteDEcison(true)} />
-        <Button text={"Update"} onClickFun={UpdateFunc} />
+      <div className={"w-full h-fit flex flex-1 flex-row justify-end"}>
+        <Button text={"Create"} onClickFun={InsertFunc} />
       </div>
     </div>
   );

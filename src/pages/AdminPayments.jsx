@@ -6,14 +6,14 @@ import { useState } from "react";
 
 export default function AdminPayments(props) {
   const CompletedOrders = props.Orders.filter(
-    (item) => item.Status == "Complete"
+    (item) => item.Status === "Complete"
   );
   let CompletedPrice = 0;
   CompletedOrders.forEach((element) => {
     CompletedPrice += element.Price;
   });
   const RemainingOrders = props.Orders.filter(
-    (item) => item.Status == "Pending"
+    (item) => item.Status === "Pending"
   );
   let RemainingPrice = 0;
   RemainingOrders.forEach((element) => {
@@ -82,7 +82,7 @@ export default function AdminPayments(props) {
       >
         <TitleBox title={"CurrentOrders"} />
         <div className={"flex p-15 flex-row justify-between"}>
-          <Counter text={"ConfirmedOrders"} amount={CompletedOrders.length} />
+          <Counter text={"CompletedOrders"} amount={CompletedOrders.length} />
           <Counter text={"Income"} amount={CompletedPrice} />
         </div>
         <div className={"flex p-15 flex-row justify-between"}>

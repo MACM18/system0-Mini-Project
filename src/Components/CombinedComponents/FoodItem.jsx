@@ -12,7 +12,7 @@ export default function foodItem({ Name, imageNumber, ClickFun }) {
         }
       >
         <img
-          src="../src/+{imageNumber}"
+          src={"/Resources/Food/" + imageNumber}
           className={"w-full h-full"}
           alt={imageNumber}
         ></img>

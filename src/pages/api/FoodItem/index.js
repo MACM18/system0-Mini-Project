@@ -71,6 +71,9 @@ const handler = async (req, res) => {
         case "Rating":
           filter = { Rating: value };
           break;
+        case "_id":
+          filter = { _id: value };
+          break;
         default:
           filter = { _id: value };
           break;

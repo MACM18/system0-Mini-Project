@@ -2,14 +2,16 @@ import { Button, TextBox, TitleBox } from "@/Components";
 import { OrderDetails, SideBarAdmin } from "@/Components/CombindedAdvanced";
 import Head from "next/head";
 import { useState } from "react";
-
+const moment = require("moment");
 export default function AdminSearch(props) {
   const [orders, setOrders] = useState(props.Orders);
   const [searchText, setSearchText] = useState("");
-  // const selected = FoodItems.filter(
-  //   (item) => (item.Meal.UserName = searchText)
-  // );
-  // setFoodItems(selected);
+
+  // const now = moment();
+  // const currentDate = now.format("YYYY-MM-DD");
+  // // const currentTime = now;
+  // const selected = props.Orders.filter((item) => item.Date == currentDate);
+  // setOrders(selected);
   // const FoodItems = [
   //   { Name: "Name1", Image: 1, Desc: "aaaaaa", Rating: 2 },
   //   { Name: "Name2", Image: 2, Desc: "aaaaaab", Rating: 5 },
@@ -39,9 +41,7 @@ export default function AdminSearch(props) {
       >
         <TitleBox title={"Food Items"} />
         <div
-          className={
-            "flex flex-auto flex-row gap-10 items-start justify-start"
-          }
+          className={"flex flex-auto flex-row gap-10 items-start justify-start"}
         >
           <TextBox
             title="Search"
@@ -64,7 +64,7 @@ export default function AdminSearch(props) {
         </div>
         <div
           className={
-            "bg-Green3 p-15 rounded-lg flex flex-wrap flex-row justify-left gap-30 overflow-y-scroll"
+            "bg-Green3 p-4 rounded-lg flex flex-wrap flex-row justify-left gap-10 overflow-y-scroll"
           }
         >
           {orders != undefined &&

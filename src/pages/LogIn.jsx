@@ -57,6 +57,7 @@ export default function LogIn() {
       details[0].Password == password
     ) {
       localStorage.setItem("CurrentUser", details[0].UserName);
+      localStorage.removeItem("CartID");
       setAlertSuccess(true);
       setTimeout(() => {
         setAlertSuccess(false);

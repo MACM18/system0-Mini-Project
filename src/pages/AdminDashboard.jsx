@@ -1,4 +1,4 @@
-import { TitleBox, Button } from "@/Components";
+import { TitleBox, Button, Label } from "@/Components";
 import { OrderSummary, SideBarAdmin } from "@/Components/CombindedAdvanced";
 import { Counter, DropDown, FoodItem } from "@/Components/CombinedComponents";
 import Head from "next/head";
@@ -13,6 +13,7 @@ export default function AdminDashboard(props) {
   const CanceledCount = canceled.length;
   const CompeteCount = complete.length;
   const AbandonedCount = abandoned.length;
+  
   return (
     <div className={" h-screen bg-Green2 flex flex-auto flex-row gap-15"}>
       <Head>
@@ -63,35 +64,50 @@ export default function AdminDashboard(props) {
           Abandoned={AbandonedCount}
         />
         <TitleBox title={"Orders"} />
-        <div className="w-full h-auto">
+        <div className="w-full h-auto overflow-y-scroll">
           <div className="w-full">
-            <div>
-              <div>Name</div>
+            {/* <div className="w-full h-fit flex flex-1 flex-row justify-around gap-4 p-2">
+              {/* <TitleBox title={"Name"} />
+              <TitleBox title={"Food"} />
+              <TitleBox title={"Price"} /> */}
+            {/* <TitleBox title={"Complete"} />
+              <TitleBox title={"Cancel"} /> */}
+            {/* Name
               <div>Food</div>
               <div>Price</div>
               <div>Complete</div>
               <div>Cancel</div>
-            </div>
+            </div> */}
             {selected.map((items) => (
-              <div>
-                <div>{items.UserName}</div>
-                <div>
+              <div className="flex flex-col gap-2 p-2">
+                <Label text={items.UserName} />
+                <div className="flex flex-row justify-around gap-3">
                   {items.Items.map((values) => (
-                    <>
-                      <div>{values.Name}</div>
-                      <div>{values.Type}</div>
-                      <div>{values.Amount}</div>
-                      <div>{values.Price}</div>
-                    </>
+                    <div className="flex flex-row gap-2">
+                      <div className="p-1 bg-Green2 rounded-lg">
+                        {values.Name}
+                      </div>
+                      {/* <div className="p-1 bg-Green2 rounded-lg">
+                        {values.Type}
+                      </div> */}
+                      <div className="p-1 bg-Green2 rounded-lg">
+                        {values.Amount}
+                      </div>
+                      <div className="p-1 bg-Green2 rounded-lg">
+                        {values.Price}
+                      </div>
+                    </div>
                   ))}
                 </div>
-                <div>{items.Price}</div>
-                <div>
+                <div className="self-end">
+                  <Label text={items.Price} width="fit" />
+                </div>
+                {/* <div>
                   <Button text={"Complete"} />
                 </div>
                 <div>
                   <Button text={"Cancel"} />
-                </div>
+                </div> */}
               </div>
             ))}
           </div>

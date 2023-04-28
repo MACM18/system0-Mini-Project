@@ -1,4 +1,4 @@
-export default function TextArea({ description }) {
+export default function TextArea(props) {
   return (
     <div
       className={
@@ -9,7 +9,8 @@ export default function TextArea({ description }) {
         className={
           "text-black text-md text-justify font-normal w-full h-full rounded-lg indent-2"
         }
-        placeholder={description}
+        onChange={props.handleChange}
+        value={props.description}
       ></textarea>
     </div>
   );

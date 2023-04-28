@@ -2,11 +2,34 @@ import { useState } from "react";
 import Button from "../Button";
 import { DropDown, FoodItem, TagList } from "../CombinedComponents";
 import Label from "../Label";
-
+const axios = require("axios");
 export default function OrderDetails(props) {
   const [menuExpanded, setMenuExpanded] = useState(false);
   let arrow = "🔽";
   menuExpanded == false ? (arrow = "🔽") : (arrow = "🔼");
+  async function updateStatus(event) {
+    let data = {
+      Selection: "_id",
+      value: props._id,
+      Fields: { Status: event.target.value },
+    };
+
+    let config = {
+      method: "put",
+      maxBodyLength: Infinity,
+      url: "http://localhost:3000/api/Orders/",
+      headers: {},
+      data: data,
+    };
+
+    try {
+      const response = await axios(config);
+      const output = await response.data;
+      console.log(output);
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
   return (
     <div
       className={
@@ -25,6 +48,7 @@ export default function OrderDetails(props) {
           <DropDown
             Title={props.Status}
             List={["Abandoned", "Canceled", "Complete", "Pending"]}
+            handleChange={updateStatus}
           />
           <Label text={props.Price} width="fit" />
         </div>
@@ -62,7 +86,7 @@ export default function OrderDetails(props) {
             >
               <Label text={item.Name} />
               <Label text={item.Type} />
-              <Label text={item.Amount} />
+              {/* <Label text={item.Amount} /> */}
               <Label text={item.Price} />
             </div>
           ))}

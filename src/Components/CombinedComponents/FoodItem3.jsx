@@ -17,7 +17,7 @@ export default function foodItem({ Name, imageNumber, Amount, Price }) {
           }
         >
           <img
-            src="../src/+{imageNumber}"
+            src={"/Resources/Food/" + imageNumber}
             className={"w-full h-full"}
             alt={imageNumber}
           ></img>
@@ -35,5 +35,5 @@ export default function foodItem({ Name, imageNumber, Amount, Price }) {
         <Label text={"Price: " + Price} width={"fit"} shadow={"transparent"} />
       </div>
     </div>
-  )
+  );
 }

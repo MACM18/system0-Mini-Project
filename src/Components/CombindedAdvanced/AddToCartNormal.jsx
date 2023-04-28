@@ -1,12 +1,16 @@
 import axios from "axios";
-import { TitleBox, TextArea, Label, Button } from "..";
-import { Alert, ItemCounter, TagList } from "../CombinedComponents";
+import { TitleBox, TextArea, Label, Button, TextBox } from "..";
+
+import { Alert, DropDown, ItemCounter, TagList } from "../CombinedComponents";
 import Image from "next/image";
 import { useState } from "react";
 // import Cart from "@/Database/models/Cart";
 export default function AddToCartNormal(props) {
   const [total, setTotal] = useState(props.Price);
   const [amount, setAmount] = useState(1);
+  const [visibility, setVisibility] = useState(false);
+  const [meal, setMeal] = useState(false);
+  const List = ["Breakfast", "Lunch", "Dinner"];
   // const [price, setPrice] = useState(0);
   // const [iteration, setIteration] = useState(0);
   const calcPrice = (amount) => {
@@ -21,6 +25,7 @@ export default function AddToCartNormal(props) {
           Status: "Pending",
           Items: [{ Name: props.FoodName, Amount: amount, Price: total }],
           Price: total,
+          Meal: meal,
         };
 
         let config = {
@@ -34,10 +39,16 @@ export default function AddToCartNormal(props) {
         localStorage.setItem("CartID", await response.data._id);
         // setPrice(price + (await response.Price));
         console.log(localStorage.getItem("CartID"));
+        setVisibility(true);
+        setTimeout(() => setVisibility(false), 2000);
       } else {
         let data2 = {
           id: localStorage.getItem("CartID"),
-          newItems: { Name: props.FoodName, Amount: amount, Price: total },
+          newItems: {
+            Name: props.FoodName,
+            Amount: amount,
+            Price: total,
+          },
         };
         console.log(localStorage.getItem("CartID"));
         let config2 = {
@@ -49,6 +60,8 @@ export default function AddToCartNormal(props) {
         };
         const response2 = await axios(config2);
         const Items = await response2.data;
+        setVisibility(true);
+        setTimeout(() => setVisibility(false), 2000);
         // console.log(Items);
       }
       //   let config3 = {
@@ -65,10 +78,10 @@ export default function AddToCartNormal(props) {
   return (
     <div
       className={
-        "flex w-auto border-2 border-Green1 p-2 flex-1 flex-col gap-15 bg-gradient-to-bl from-Green3 to-Green2 backdrop-blur-sm rounded-lg absolute shadow-xl shadow-black"
+        "flex w-auto border-2 border-Green1 p-2 flex-1 flex-col gap-15 bg-gradient-to-bl from-Green3 to-Green2 backdrop-blur-sm rounded-lg relative shadow-xl shadow-black"
       }
     >
-      <Alert Text={"Added to the Cart"}></Alert>
+      {visibility && <Alert Text={"Added to the Cart"} />}
       <div
         onClick={props.CloseButtonFunc}
         className={
@@ -88,13 +101,23 @@ export default function AddToCartNormal(props) {
           <TitleBox title={props.FoodName} />
           <TagList tags={props.Tags} />
           <Label text={props.Description} />
+          <TextBox
+            title={"Meal"}
+            handleChange={(event) => setMeal(event.target.value)}
+          />
+
+          {/* <DropDown
+            ListItem={["Abandoned", "Canceled", "Complete", "Pending"]}
+            Title={"Meal"}
+          /> */}
         </div>
 
         <Image
-          src={"/Resources/Food/" + props.ImageName + ".jpg"}
+          src={"/Resources/Food/" + props.ImageName}
           width={250}
           height={250}
           alt={props.ImageName}
+          className="rounded-md"
         />
       </div>
       <div

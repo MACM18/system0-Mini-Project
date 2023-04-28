@@ -39,14 +39,15 @@ export default function Cart(props) {
       value: stored,
       Fields: { Price: total },
     };
+
     let data = {
       UserName: storedName,
       Time: currentTime,
       Date: currentDate,
       Price: total,
       Status: "Pending",
-      Items: filterd.Items,
-      Meal: filterd.Meal,
+      Items: array[0].Items,
+      Meal: array[0].Meal,
     };
     let configCart = {
       method: "put",
@@ -81,35 +82,45 @@ export default function Cart(props) {
       <div className={"w-fit h-full"}>
         <SideBarUser />
       </div>
-      <div className="bg-white w-full h-full rounded-lg p-15 flex flex-1 flex-col gap-15">
+      <div className="bg-white w-full h-full rounded-lg p-15 flex flex-1 flex-col gap-15 ">
         <TitleBox title={"Cart"} />
         <Label text={stored} />
-        <div className={"w-full h-full"}>
+        <div className={"w-auto h-full overflow-y-scroll"}>
           {filterd != undefined &&
             filterd.map((order) => (
               <div
                 key={order._id}
                 className={"w-full h-fit p-10 bg-white rounded-lg"}
               >
-                <div>
+                <div className="w-full flex flex-1 flex-row justify-around">
                   <Label text={order.UserName} width={"fit"} />
                   <Label text={order.Status} width={"fit"} />
                 </div>
-                <div>
+                <div className="w-full flex flex-col gap-4 m-4">
                   {order.Items.map((item) => (
-                    <>
-                      <div>{item.Name}</div>
-                      <div>{item.Amount}</div>
-                      <div>{item.Price}</div>
-                    </>
+                    <div className="w-full flex flex-row justify-around gap-4">
+                      <div className="p-1 bg-slate-200 rounded-md w-full">
+                        {item.Name}
+                      </div>
+                      <div className="p-1 bg-slate-200 rounded-md w-full text-center">
+                        {item.Amount}
+                      </div>
+                      <div className="p-1 bg-slate-200 rounded-md w-full text-right">
+                        {item.Price}
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
             ))}
-          <div>{filterd != undefined && <Label text={filterd.Total} />}</div>
-          <div>
-            <Button text={"Cancel"} />
+
+          {/* <div>{filterd != undefined && <Label text={filterd.Total} />}</div> */}
+          <div className="w-full flex flex-1 flex-row justify-around m-4">
             <Button text={"Submit"} onClickFun={submitOrder} />
+            <Button
+              text={"New Cart"}
+              onClickFun={() => localStorage.removeItem("CartID")}
+            />
           </div>
         </div>
       </div>

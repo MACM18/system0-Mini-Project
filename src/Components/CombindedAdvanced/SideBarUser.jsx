@@ -30,8 +30,7 @@ export default function SideBarMenu() {
           <OptionBox
             List={[
               { Text: "Order History", Link: "../OrderHistoryUser" },
-              { Text: "Reviews", Link: "../ReviewsUser" },
-              { Text: "Settings", Link: "" },
+              { Text: "Cart", Link: "./Cart" },
               { Text: "Food menu", Link: "../Menu" },
             ]}
           />
