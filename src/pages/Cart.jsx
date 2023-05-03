@@ -26,7 +26,11 @@ export default function Cart(props) {
   const now = moment();
   const currentDate = now.format("YYYY-MM-DD");
   const currentTime = now;
-
+  useEffect(() => {
+    if (localStorage.getItem("Status") != "OK") {
+      router.push("./LogIn");
+    }
+  }, []);
   async function submitOrder() {
     const array = props.Carts.filter((item) => item._id == stored);
     let total = 0;
@@ -76,36 +80,36 @@ export default function Cart(props) {
   return (
     <div
       className={
-        "bg-Green2 w-full h-screen rounded-lg flex flex-1 flex-row gap-15"
+        "bg-Green2 w-screen h-screen rounded-lg flex flex-1 flex-row p-2 gap-15"
       }
     >
-      <div className={"w-fit h-full"}>
+      <div className={"max-w-2/5 h-full"}>
         <SideBarUser />
       </div>
-      <div className="bg-white w-full h-full rounded-lg p-15 flex flex-1 flex-col gap-15 ">
+      <div className="bg-white w-full h-full rounded-lg p-15 flex flex-1 flex-col gap-15">
         <TitleBox title={"Cart"} />
         <Label text={stored} />
-        <div className={"w-auto h-full overflow-y-scroll"}>
+        <div className={"w-full h-full overflow-y-scroll"}>
           {filterd != undefined &&
             filterd.map((order) => (
               <div
                 key={order._id}
-                className={"w-full h-fit p-10 bg-white rounded-lg"}
+                className={"w-full h-fit py-10 bg-white rounded-lg"}
               >
                 <div className="w-full flex flex-1 flex-row justify-around">
                   <Label text={order.UserName} width={"fit"} />
                   <Label text={order.Status} width={"fit"} />
                 </div>
-                <div className="w-full flex flex-col gap-4 m-4">
+                <div className="w-full flex flex-col gap-4 my-4">
                   {order.Items.map((item) => (
-                    <div className="w-full flex flex-row justify-around gap-4">
-                      <div className="p-1 bg-slate-200 rounded-md w-full">
+                    <div className="w-full grid grid-cols-3 justify-items-center gap-4">
+                      <div className="px-6 p-1 bg-slate-200 rounded-md w-fit">
                         {item.Name}
                       </div>
-                      <div className="p-1 bg-slate-200 rounded-md w-full text-center">
+                      <div className="px-6 p-1 bg-slate-200 rounded-md w-fit text-center">
                         {item.Amount}
                       </div>
-                      <div className="p-1 bg-slate-200 rounded-md w-full text-right">
+                      <div className="px-6 p-1 bg-slate-200 rounded-md w-fit text-right">
                         {item.Price}
                       </div>
                     </div>

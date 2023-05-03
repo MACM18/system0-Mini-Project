@@ -1,8 +1,10 @@
 import Rating from "@/Components/Rating.jsx";
 import Image from "next/image";
 import Button from "../Button";
+import Label from "../Label";
 export default function foodItem2({
   Name,
+  price,
   imageNumber,
   description,
   rating,
@@ -15,11 +17,7 @@ export default function foodItem2({
         "min-h-36 w-80 bg-white rounded-xl border-2 border-Green1 text-Green1 shadow-md shadow-Green1 p-2 flex flex-1 flex-row gap-1"
       }
     >
-      <div
-        className={
-          "flex flex-initial flex-col w-20 justify-between items-start gap-15"
-        }
-      >
+      <div className={"flex  flex-col w-20 justify-around gap-15"}>
         <div
           className={
             "w-20 h-20 bg-white rounded-lg border border-Green1 shadow-sm shadow-black"
@@ -31,7 +29,9 @@ export default function foodItem2({
             alt={imageNumber}
           ></img>
         </div>
-        <Rating value={rating} />
+        <div>
+          <Rating value={rating} />
+        </div>
       </div>
       <div
         className={
@@ -57,6 +57,9 @@ export default function foodItem2({
         </div>
         <div className={"w-full h-full"}>
           <p className={"text-left"}>{description}</p>
+        </div>
+        <div>
+          <Label text={"Rs." + price + ".00"} />
         </div>
         <Button text={"ADD"} onClickFun={AddToCartFunc} />
       </div>

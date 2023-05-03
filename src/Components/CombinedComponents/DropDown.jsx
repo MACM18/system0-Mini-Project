@@ -11,7 +11,9 @@ export default function DropDown(props) {
       value={props.Title}
     >
       {props.List != undefined &&
-        props.List.map((ListItem, index) => <option>{ListItem}</option>)}
+        props.List.map((ListItem, index) => (
+          <option key={index}>{ListItem}</option>
+        ))}
     </select>
   );
 }

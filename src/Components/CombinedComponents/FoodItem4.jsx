@@ -124,7 +124,7 @@ export default function FoodItem4(props) {
   return (
     <div
       className={
-        "bg-white p-15 shadow-lg shadow-black rounded-lg flex flex-1 flex-col  gap-30 w-full h-screen"
+        "bg-white p-2 shadow-lg shadow-black rounded-lg flex flex-1 flex-col  gap-30 w-full h-fit"
       }
     >
       {updateVisibility && <Alert Text="Data Updated" />}
@@ -188,7 +188,9 @@ export default function FoodItem4(props) {
         />
       </div>
       <div
-        className={"w-full flex flex-1 justify-start flex-row gap-15 max-h-fit"}
+        className={
+          "w-full flex flex-1 justify-start flex-row gap-15 max-h-fit items-center"
+        }
       >
         <Label text={"Meals"} width="fit" />
         <input
@@ -196,34 +198,45 @@ export default function FoodItem4(props) {
           name="Breakfast"
           id="BF"
           value={"Breakfast"}
+          className=" w-6 h-6"
           onClick={() => {
             setBF(!BF);
           }}
         />
-        <label htmlFor="BF">Breakfast</label>
+        <label className="text-Green1 font-medium" htmlFor="BF">
+          Breakfast
+        </label>
         <input
           type="checkbox"
           name="Lunch"
           id="LH"
           value={"Lunch"}
+          className=" w-6 h-6"
           onClick={() => {
             setLH(!LH);
           }}
         />
-        <label htmlFor="LH">Lunch</label>
+        <label className="text-Green1 font-medium" htmlFor="LH">
+          Lunch
+        </label>
         <input
           type="checkbox"
           name="Dinner"
           id="DR"
           value={"Dinner"}
+          className=" w-6 h-6"
           onClick={() => {
             setDR(!DR);
           }}
         />
-        <label htmlFor="DR">Dinner</label>
+        <label className="text-Green1 font-medium" htmlFor="DR">
+          Dinner
+        </label>
       </div>
       <div
-        className={"w-full flex flex-1 justify-start flex-row gap-15 max-h-fit"}
+        className={
+          "w-full flex flex-1 justify-start flex-row gap-15 max-h-fit items-center"
+        }
       >
         <Label text={"Type"} width="fit" />
         <input
@@ -231,51 +244,66 @@ export default function FoodItem4(props) {
           name="Chicken"
           id="Chicken"
           value={"Chicken"}
+          className=" w-6 h-6"
           onClick={() => {
             setChicken(!chicken);
           }}
         />
-        <label htmlFor="Chicken">Chicken</label>
+        <label className="text-Green1 font-medium" htmlFor="Chicken">
+          Chicken
+        </label>
         <input
           type="checkbox"
           name="Fish"
           id="Fish"
           value={"Fish"}
+          className=" w-6 h-6"
           onClick={() => {
             setFish(!fish);
           }}
         />
-        <label htmlFor="Fish">Fish</label>
+        <label className="text-Green1 font-medium" htmlFor="Fish">
+          Fish
+        </label>
         <input
           type="checkbox"
           name="Egg"
           id="Egg"
           value={"Egg"}
+          className=" w-6 h-6"
           onClick={() => {
             setEgg(!egg);
           }}
         />
-        <label htmlFor="Egg">Egg</label>
+        <label className="text-Green1 font-medium" htmlFor="Egg">
+          Egg
+        </label>
         <input
           type="checkbox"
           name="Veg"
           id="Veg"
           value={"Veg"}
+          className=" w-6 h-6"
           onClick={() => {
             setVeg(!veg);
           }}
         />
-        <label htmlFor="Veg">Veg</label>
+        <label className="text-Green1 font-medium" htmlFor="Veg">
+          Veg
+        </label>
         <input
           type="checkbox"
           name="Fried Fish"
           id="Fried Fish"
           value={"Fried Fish"}
+          className=" w-6 h-6"
           onClick={() => {
             setFFish(!fFish);
           }}
         />
-        <label htmlFor="Fried Fish">Fried Fish</label>
+        <label className="text-Green1 font-medium" htmlFor="Fried Fish">
+          Fried Fish
+        </label>
       </div>
       <div className={"w-full h-fit flex flex-1 flex-row justify-between"}>
         <Button text={"Remove"} onClickFun={() => setDeleteDEcison(true)} />

@@ -6,8 +6,9 @@ import {
   RatingsEditable,
   TagList,
 } from "@/Components/CombinedComponents";
+import { useRouter } from "next/router";
 import { useState } from "react";
-
+import { useEffect } from "react";
 export default function Menu(props) {
   // const FoodItems = [
   //   { Name: "Name1", Image: 1, Desc: "aaaaaa", Rating: 2 },
@@ -24,7 +25,12 @@ export default function Menu(props) {
   //   { Name: "Name3", Image: 3, Desc: "aaaaaabb", Rating: 1 },
   // ];
   const [serchBoxState, setSearchBoxState] = useState(true);
-
+  const router = useRouter();
+  useEffect(() => {
+    if (localStorage.getItem("Status") != "OK") {
+      router.push("./LogIn");
+    }
+  }, []);
   return (
     <div
       className={

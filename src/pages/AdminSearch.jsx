@@ -2,11 +2,21 @@ import { Button, TextBox, TitleBox } from "@/Components";
 import { OrderDetails, SideBarAdmin } from "@/Components/CombindedAdvanced";
 import Head from "next/head";
 import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 const moment = require("moment");
 export default function AdminSearch(props) {
   const [orders, setOrders] = useState(props.Orders);
   const [searchText, setSearchText] = useState("");
-
+  const router = useRouter();
+  useEffect(() => {
+    if (localStorage.getItem("Status") != "Admin") {
+      console.log("true");
+      router.push("./LogIn");
+    } else {
+      console.log("true");
+    }
+  }, []);
   // const now = moment();
   // const currentDate = now.format("YYYY-MM-DD");
   // // const currentTime = now;

@@ -6,12 +6,21 @@ import {
 } from "@/Components/CombinedComponents";
 import AdminFooditemVarients from "@/Components/CombinedComponents/AdminFooditemVarients";
 import Head from "next/head";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
 export default function AdminFoodItems(props) {
   const [foodItems, setFoodItems] = useState(props.FoodItems);
   const [searchText, setSearchText] = useState("");
-
+  const router = useRouter();
+  useEffect(() => {
+    if (localStorage.getItem("Status") != "Admin") {
+      console.log("true");
+      router.push("./LogIn");
+    } else {
+      console.log("true");
+    }
+  }, []);
   return (
     <div className={" h-screen bg-Green2 flex flex-auto flex-row gap-15"}>
       <Head>
@@ -23,9 +32,7 @@ export default function AdminFoodItems(props) {
       </div>
 
       <div
-        className={
-          "bg-white rounded-lg w-full p-10 flex flex-auto flex-col gap-10"
-        }
+        className={"bg-white rounded-lg m-2 w-full p-10 flex flex-col gap-10"}
       >
         <FoodItemCombinedAdd />
         <TitleBox title={"Food Items"} />
@@ -51,7 +58,7 @@ export default function AdminFoodItems(props) {
         </div>
         <div
           className={
-            "bg-Green3 p-15 rounded-lg flex flex-wrap flex-row justify-between gap-30"
+            "bg-Green3 p-15 rounded-lg flex flex-wrap flex-row justify-between gap-30 "
           }
         >
           {foodItems != undefined &&

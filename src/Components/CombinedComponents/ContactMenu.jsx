@@ -2,7 +2,10 @@ import TitleBox from "../TitleBox";
 import Label from "../Label";
 import Button from "../Button";
 import Link from "next/link";
+import { useState } from "react";
 export default function contactMenu(email, phoneNo) {
+  const [emailVisibility, setEmailVisibility] = useState(false);
+  const [phoneVisibility, setPhoneVisibility] = useState(false);
   return (
     <div
       className={
@@ -12,11 +15,42 @@ export default function contactMenu(email, phoneNo) {
       <TitleBox title="Contact" />
       <Label text={"Admin"} />
       <Link href="mailto:admn@a.com">
-        <Button text={"Email"} />
+        {!emailVisibility && (
+          <Button
+            text={"Email"}
+            onClickFun={() => {
+              setEmailVisibility(true);
+            }}
+          />
+        )}
+        {emailVisibility && (
+          <Label
+            text={"admn@a.com"}
+            handleClick={() => {
+              setEmailVisibility(false);
+            }}
+          />
+        )}
       </Link>
 
       <Label text={"Canteen"} />
-      <Button text={"Telephone"} link={"+94" + phoneNo / 10} />
+      {!phoneVisibility && (
+        <Button
+          text={"Telephone"}
+          link={"+94" + phoneNo / 10}
+          onClickFun={() => {
+            setPhoneVisibility(true);
+          }}
+        />
+      )}
+      {phoneVisibility && (
+        <Label
+          text={"+9400000"}
+          handleClick={() => {
+            setPhoneVisibility(false);
+          }}
+        />
+      )}
     </div>
   );
 }

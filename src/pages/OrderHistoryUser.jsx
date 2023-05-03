@@ -1,10 +1,13 @@
 import { Button, Label, TextBox, TitleBox } from "@/Components";
 import { SideBarUser } from "@/Components/CombindedAdvanced";
 import { DropDown, TagList } from "@/Components/CombinedComponents";
+import { useRouter } from "next/router";
 import { useState } from "react";
+import { useEffect } from "react";
 const axios = require("axios");
 export default function Menu() {
   const [Orders, setOrders] = useState([]);
+  const router = useRouter();
   let config = {
     method: "post",
     maxBodyLength: Infinity,
@@ -15,6 +18,11 @@ export default function Menu() {
         typeof window !== "undefined" && localStorage.getItem("CurrentUser"),
     },
   };
+  useEffect(() => {
+    if (localStorage.getItem("Status") != "OK") {
+      router.push("./LogIn");
+    }
+  }, []);
   async function getOrders() {
     try {
       const response = await axios(config);

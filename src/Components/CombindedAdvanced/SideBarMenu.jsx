@@ -6,7 +6,11 @@ export default function SideBarMenu(props) {
   const router = useRouter();
   const [menuStatus, setMenuStatus] = useState(false);
   return (
-    <div className={"flex flex-1 flex-col gap-10 justify-between p-15"}>
+    <div
+      className={
+        "flex flex-1 flex-col gap-10 bg-white rounded-lg m-2 justify-between p-15"
+      }
+    >
       <div
         className={"flex flex-1 flex-row justify-between gap-15 items-center"}
       >
@@ -52,8 +56,14 @@ export default function SideBarMenu(props) {
       )}
 
       {menuStatus && (
-        <div className="flex flex-1 flex-row justify-between gap-2">
-          <Button text={"Back"} onClickFun={() => router.push("./LogIn")} />
+        <div className="flex flex-1 flex-row self-end justify-between gap-2">
+          {/* {localStorage.getItem("Status") == "OK" && (
+            <Button text={"Back"} onClickFun={() => router.push("./LogIn")} />
+          )} */}
+
+          {localStorage.getItem("Status") != "OK" && (
+            <Button text={"Log In"} onClickFun={() => router.push("./LogIn")} />
+          )}
         </div>
       )}
     </div>

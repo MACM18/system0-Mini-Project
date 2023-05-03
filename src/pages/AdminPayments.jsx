@@ -3,8 +3,19 @@ import { SideBarAdmin } from "@/Components/CombindedAdvanced";
 import { Counter } from "@/Components/CombinedComponents";
 import Head from "next/head";
 import { useState } from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function AdminPayments(props) {
+  const router = useRouter();
+  useEffect(() => {
+    if (localStorage.getItem("Status") != "Admin") {
+      console.log("true");
+      router.push("./LogIn");
+    } else {
+      console.log("true");
+    }
+  }, []);
   const CompletedOrders = props.Orders.filter(
     (item) => item.Status === "Complete"
   );
@@ -77,7 +88,7 @@ export default function AdminPayments(props) {
       </div>
       <div
         className={
-          "bg-white rounded-lg w-full p-10 flex flex-auto flex-col justify-between"
+          "bg-white rounded-lg m-2 w-full p-10 flex flex-auto flex-col justify-between"
         }
       >
         <TitleBox title={"CurrentOrders"} />

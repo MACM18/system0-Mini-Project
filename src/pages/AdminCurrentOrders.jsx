@@ -3,8 +3,19 @@ import { OrderDetails, SideBarAdmin } from "@/Components/CombindedAdvanced";
 import ItemOrganizer from "@/Components/CombindedAdvanced/ItemOrganizer";
 import { Counter, ItemCounter } from "@/Components/CombinedComponents";
 import Head from "next/head";
-
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 export default function AdminCurrentOrders(props) {
+  const router = useRouter();
+  useEffect(() => {
+    if (localStorage.getItem("Status") != "Admin") {
+      console.log("true");
+      router.push("./LogIn");
+    } else {
+      console.log("true");
+    }
+  }, []);
+
   // console.log(props.FoodItems);
 
   const CompleteData = props.Orders.filter(

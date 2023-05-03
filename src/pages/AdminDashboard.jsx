@@ -2,7 +2,8 @@ import { TitleBox, Button, Label } from "@/Components";
 import { OrderSummary, SideBarAdmin } from "@/Components/CombindedAdvanced";
 import { Counter, DropDown, FoodItem } from "@/Components/CombinedComponents";
 import Head from "next/head";
-
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 export default function AdminDashboard(props) {
   const selected = props.Orders.filter((item) => item.Status != "Complete");
   const canceled = props.Orders.filter((item) => item.Status == "Canceled");
@@ -13,7 +14,15 @@ export default function AdminDashboard(props) {
   const CanceledCount = canceled.length;
   const CompeteCount = complete.length;
   const AbandonedCount = abandoned.length;
-  
+  const router = useRouter();
+  useEffect(() => {
+    if (localStorage.getItem("Status") != "Admin") {
+      console.log("true");
+      router.push("./LogIn");
+    } else {
+      console.log("true");
+    }
+  }, []);
   return (
     <div className={" h-screen bg-Green2 flex flex-auto flex-row gap-15"}>
       <Head>
@@ -24,11 +33,11 @@ export default function AdminDashboard(props) {
       </div>
       <div
         className={
-          "bg-white rounded-lg w-full p-10 flex flex-auto flex-col justify-between"
+          "bg-white rounded-lg w-full p-10 flex flex-auto flex-col justify-start gap-2"
         }
       >
         <TitleBox title={"Dashboard"} />
-        <TitleBox title={"Order Summary"} />
+        {/* <TitleBox title={"Order Summary"} /> */}
         {/* <div className={"flex flex-row justify-between"}>
           <div>
             <DropDown
@@ -79,21 +88,21 @@ export default function AdminDashboard(props) {
               <div>Cancel</div>
             </div> */}
             {selected.map((items) => (
-              <div className="flex flex-col gap-2 p-2">
+              <div className="w-full flex flex-col gap-2 p-2">
                 <Label text={items.UserName} />
-                <div className="flex flex-row justify-around gap-3">
+                <div className="w-full flex flex-col justify-around gap-3">
                   {items.Items.map((values) => (
-                    <div className="flex flex-row gap-2">
-                      <div className="p-1 bg-Green2 rounded-lg">
+                    <div className="grid grid-cols-3 justify-items-center gap-2">
+                      <div className="p-1 bg-Green2 px-6 rounded-lg">
                         {values.Name}
                       </div>
                       {/* <div className="p-1 bg-Green2 rounded-lg">
                         {values.Type}
                       </div> */}
-                      <div className="p-1 bg-Green2 rounded-lg">
+                      <div className="p-1 bg-Green2 px-6 rounded-lg">
                         {values.Amount}
                       </div>
-                      <div className="p-1 bg-Green2 rounded-lg">
+                      <div className="p-1 bg-Green2 px-6 rounded-lg">
                         {values.Price}
                       </div>
                     </div>

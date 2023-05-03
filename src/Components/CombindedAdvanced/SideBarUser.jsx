@@ -6,9 +6,13 @@ export default function SideBarMenu() {
   const [menuStatus, setMenuStatus] = useState(false);
   const router = useRouter();
   return (
-    <div className={"flex flex-1 flex-col gap-10 justify-between p-15"}>
+    <div
+      className={
+        "flex flex-1 flex-col gap-10 bg-white rounded-lg m-2 justify-between p-15"
+      }
+    >
       <div
-        className={"flex flex-1 flex-row justify-between gap-15 items-center"}
+        className={"flex flex-1 flex-row justify-between  gap-15 items-center"}
       >
         <ArrowButton
           onToggle={() =>
@@ -41,6 +45,8 @@ export default function SideBarMenu() {
           <Button
             text={"Log Out"}
             onClickFun={() => {
+              localStorage.removeItem("Status");
+              localStorage.removeItem("CartID");
               router.push("../LogIn");
             }}
           />

@@ -2,8 +2,18 @@ import { Button, TextBox, TitleBox } from "@/Components";
 import { OrderDetails, SideBarAdmin } from "@/Components/CombindedAdvanced";
 import ItemOrganizer from "@/Components/CombindedAdvanced/ItemOrganizer";
 import Head from "next/head";
-
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 export default function AdminFoodAvailability(props) {
+  const router = useRouter();
+  useEffect(() => {
+    if (localStorage.getItem("Status") != "Admin") {
+      console.log("true");
+      router.push("./LogIn");
+    } else {
+      console.log("true");
+    }
+  }, []);
   // console.log(props.FoodItems.Availability);
   const Available = props.FoodItems.filter((item) => item.Availability == true);
   const UnAvailable = props.FoodItems.filter(

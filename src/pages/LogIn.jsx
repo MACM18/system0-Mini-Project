@@ -49,7 +49,7 @@ export default function LogIn() {
     // console.log(details);
     const response2 = await axios(config2);
     const details2 = await response2.data;
-    console.log(details2);
+    // console.log(details2);
     if (
       (details[0] != undefined &&
         details[0] != undefined &&
@@ -57,12 +57,14 @@ export default function LogIn() {
       details[0].Password == password
     ) {
       localStorage.setItem("CurrentUser", details[0].UserName);
-      localStorage.removeItem("CartID");
+      // localStorage.removeItem("CartID");
+      localStorage.setItem("Status", "OK");
       setAlertSuccess(true);
       setTimeout(() => {
         setAlertSuccess(false);
       }, 1000);
       if (!details2[0] != undefined && details2[0].Type == "Special") {
+        localStorage.setItem("Status", "Admin");
         router.push("./AdminDashboard");
       } else {
         router.push("./Menu/");

@@ -35,9 +35,10 @@ export default function FoodItemCombined({
           imageNumber={imageNumber}
           description={desc}
           rating={Rating}
+          price={Price}
           ClickFun={() => setVarient(0)}
           AddToCartFunc={() => {
-            Curry == undefined || Curry == "" ? setVarient(2) : setVarient(2);
+            if (localStorage.getItem("Status") == "OK") setVarient(2);
           }}
         />
       )}
@@ -48,7 +49,7 @@ export default function FoodItemCombined({
           Tags={Tags}
           ImageName={imageNumber}
           Price={Price}
-          CloseButtonFunc={() => setVarient(1)}
+          CloseButtonFunc={() => setVarient(0)}
         />
       )}
       {varient == 3 && (

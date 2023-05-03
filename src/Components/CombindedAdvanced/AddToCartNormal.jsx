@@ -10,6 +10,7 @@ export default function AddToCartNormal(props) {
   const [amount, setAmount] = useState(1);
   const [visibility, setVisibility] = useState(false);
   const [meal, setMeal] = useState(false);
+  const [type, setType] = useState("Veg");
   const List = ["Breakfast", "Lunch", "Dinner"];
   // const [price, setPrice] = useState(0);
   // const [iteration, setIteration] = useState(0);
@@ -23,7 +24,9 @@ export default function AddToCartNormal(props) {
         let data = {
           UserName: localStorage.getItem("CurrentUser"),
           Status: "Pending",
-          Items: [{ Name: props.FoodName, Amount: amount, Price: total }],
+          Items: [
+            { Name: props.FoodName, Amount: amount, Price: total, Type: type },
+          ],
           Price: total,
           Meal: meal,
         };
@@ -48,6 +51,7 @@ export default function AddToCartNormal(props) {
             Name: props.FoodName,
             Amount: amount,
             Price: total,
+            Type: type,
           },
         };
         console.log(localStorage.getItem("CartID"));
@@ -101,15 +105,25 @@ export default function AddToCartNormal(props) {
           <TitleBox title={props.FoodName} />
           <TagList tags={props.Tags} />
           <Label text={props.Description} />
-          <TextBox
+          {/* <TextBox
             title={"Meal"}
             handleChange={(event) => setMeal(event.target.value)}
           />
-
-          {/* <DropDown
-            ListItem={["Abandoned", "Canceled", "Complete", "Pending"]}
-            Title={"Meal"}
+          <TextBox
+            title={"Type"}
+            handleChange={(event) => setType(event.target.value)}
           /> */}
+
+          <DropDown
+            List={["Breakfast", "Lunch", "Dinner"]}
+            Title={meal}
+            handleChange={(event) => setMeal(event.target.value)}
+          />
+          <DropDown
+            Title={type}
+            List={["Veg", "Chicken", "Fish", "Fried Fish", "Egg"]}
+            handleChange={(event) => setType(event.target.value)}
+          />
         </div>
 
         <Image
